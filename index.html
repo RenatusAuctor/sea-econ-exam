@@ -1,0 +1,495 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>동남아시아 경제론 기말 모의시험 (2026년도 자료판)</title>
+<style>
+  *,*::before,*::after{box-sizing:border-box}
+  body,h1,h2,h3,p,ul,ol,figure,blockquote{margin:0}
+  ul,ol{padding:0}
+  button,input,select,textarea{font-family:inherit; font-size:100%}
+  img,svg{max-width:100%; display:block}
+  table{border-collapse:collapse}
+</style>
+</head>
+<body>
+<style>
+  :root{
+    --paper:#F6F7F3; --surface:#FFFFFF; --surface2:#EEF1E9;
+    --ink:#16211F; --ink2:#4B5652; --ink3:#79837E;
+    --line:#DBDFD5; --line2:#C7CDBF;
+    --deep:#14383A; --brass:#8F661A; --brass-soft:#F1E6CB;
+    --ok:#3B7A38; --ok-soft:#E6F0DF;
+    --no:#A03F37; --no-soft:#F7E3E0;
+    --shadow:0 1px 2px rgba(20,56,58,.06), 0 8px 24px -16px rgba(20,56,58,.25);
+    --fd:"Nanum Myeongjo","Batang","Yu Mincho","Hiragino Mincho ProN",serif;
+    --fb:"Malgun Gothic","Apple SD Gothic Neo","Yu Gothic","Hiragino Sans","Noto Sans KR",system-ui,sans-serif;
+    --fm:ui-monospace,"SF Mono","Cascadia Mono",Consolas,monospace;
+  }
+  @media (prefers-color-scheme:dark){
+    :root{
+      --paper:#0F1412; --surface:#161C19; --surface2:#1E2521;
+      --ink:#E9EEE8; --ink2:#A9B3AD; --ink3:#7D8782;
+      --line:#2B322D; --line2:#3A423B;
+      --deep:#84BAB6; --brass:#D3A552; --brass-soft:#332E1E;
+      --ok:#84C272; --ok-soft:#1C2819;
+      --no:#E28981; --no-soft:#2D1C1A;
+      --shadow:0 1px 2px rgba(0,0,0,.4), 0 8px 24px -16px rgba(0,0,0,.8);
+    }
+  }
+  :root[data-theme="dark"]{
+    --paper:#0F1412; --surface:#161C19; --surface2:#1E2521;
+    --ink:#E9EEE8; --ink2:#A9B3AD; --ink3:#7D8782;
+    --line:#2B322D; --line2:#3A423B;
+    --deep:#84BAB6; --brass:#D3A552; --brass-soft:#332E1E;
+    --ok:#84C272; --ok-soft:#1C2819;
+    --no:#E28981; --no-soft:#2D1C1A;
+    --shadow:0 1px 2px rgba(0,0,0,.4), 0 8px 24px -16px rgba(0,0,0,.8);
+  }
+  :root[data-theme="light"]{
+    --paper:#F6F7F3; --surface:#FFFFFF; --surface2:#EEF1E9;
+    --ink:#16211F; --ink2:#4B5652; --ink3:#79837E;
+    --line:#DBDFD5; --line2:#C7CDBF;
+    --deep:#14383A; --brass:#8F661A; --brass-soft:#F1E6CB;
+    --ok:#3B7A38; --ok-soft:#E6F0DF;
+    --no:#A03F37; --no-soft:#F7E3E0;
+    --shadow:0 1px 2px rgba(20,56,58,.06), 0 8px 24px -16px rgba(20,56,58,.25);
+  }
+
+  body{background:var(--paper); color:var(--ink); font-family:var(--fb);
+       font-size:16px; line-height:1.72; -webkit-text-size-adjust:100%;
+       word-break:keep-all; overflow-wrap:break-word;}
+  .wrap{max-width:47rem; margin:0 auto; padding:0 1.25rem 6rem;}
+
+  .bar{position:sticky; top:0; z-index:30; background:var(--surface);
+       border-bottom:1px solid var(--line); box-shadow:var(--shadow);}
+  .bar-in{max-width:47rem; margin:0 auto; padding:.6rem 1.25rem;
+          display:flex; align-items:center; gap:.9rem; flex-wrap:wrap;}
+  .bar-title{font-family:var(--fd); font-size:.95rem; letter-spacing:.01em; margin-right:auto;}
+  .tally{font-family:var(--fm); font-size:.8rem; color:var(--ink2);
+         font-variant-numeric:tabular-nums; white-space:nowrap;}
+  .tally b{color:var(--ink); font-size:1rem;}
+  .btn{font:inherit; font-size:.82rem; padding:.42rem .95rem; border-radius:2px;
+       border:1px solid var(--deep); background:var(--deep); color:var(--paper);
+       cursor:pointer;}
+  .btn:hover{opacity:.87}
+  .btn.ghost{background:transparent; color:var(--ink2); border-color:var(--line2);}
+  .btn:focus-visible,.chip:focus-visible,.opt:focus-visible{outline:2px solid var(--brass); outline-offset:2px;}
+
+  header.top{padding:2.75rem 0 1.5rem; border-bottom:2px solid var(--deep);}
+  .eyebrow{font-family:var(--fm); font-size:.7rem; letter-spacing:.16em;
+           text-transform:uppercase; color:var(--brass);}
+  h1{font-family:var(--fd); font-size:clamp(1.5rem,4.4vw,2.1rem); line-height:1.35;
+     margin:.5rem 0 .6rem; text-wrap:balance; font-weight:700;}
+  .meta{font-size:.83rem; color:var(--ink2); line-height:1.9;}
+  .meta span{white-space:nowrap;}
+  .caution{margin-top:1.1rem; padding:.8rem 1rem; background:var(--brass-soft);
+           border-left:3px solid var(--brass); font-size:.8rem; line-height:1.8; color:var(--ink2);}
+
+  section{margin-top:3rem;}
+  .sec-head{display:flex; align-items:baseline; gap:.7rem; flex-wrap:wrap;
+            padding-bottom:.5rem; border-bottom:1px solid var(--line2);}
+  .sec-num{font-family:var(--fd); font-size:1.5rem; color:var(--brass); line-height:1;}
+  .sec-title{font-family:var(--fd); font-size:1.18rem; font-weight:700;}
+  .sec-jp{font-size:.78rem; color:var(--ink3);}
+  .sec-pts{margin-left:auto; font-family:var(--fm); font-size:.75rem; color:var(--ink3);
+           font-variant-numeric:tabular-nums;}
+  .sec-instr{font-size:.85rem; color:var(--ink2); margin-top:.7rem;}
+
+  .legend{position:sticky; top:3.75rem; z-index:20; margin-top:.8rem;
+          background:var(--surface2); border:1px solid var(--line);
+          padding:.55rem .8rem; font-size:.78rem; line-height:1.9;
+          max-height:7.6rem; overflow-y:auto;}
+  .legend-lab{font-family:var(--fm); font-size:.68rem; letter-spacing:.12em;
+              text-transform:uppercase; color:var(--ink3); margin-right:.4rem;}
+  .legend i{font-style:normal; color:var(--ink2); margin-right:.8rem; white-space:nowrap;}
+  .legend i b{font-style:normal; font-weight:700; color:var(--ink);}
+
+  .passage{margin-top:1.1rem; padding:1.1rem 1.2rem; background:var(--surface);
+           border:1px solid var(--line); font-size:.93rem; line-height:1.95;}
+  .passage p + p{margin-top:.9rem;}
+  .blank{font-family:var(--fm); font-weight:700; color:var(--brass);
+         font-variant-numeric:tabular-nums; padding:0 .12em;}
+
+  .q{margin-top:1.1rem; padding:.95rem 1.1rem; background:var(--surface);
+     border:1px solid var(--line); border-left:3px solid var(--line2);}
+  .q.right{border-left-color:var(--ok); background:var(--ok-soft);}
+  .q.wrong{border-left-color:var(--no); background:var(--no-soft);}
+  .q-head{display:flex; align-items:baseline; gap:.6rem;}
+  .q-no{font-family:var(--fm); font-size:.82rem; font-weight:700; color:var(--ink3);
+        font-variant-numeric:tabular-nums; flex:none;}
+  .q-text{font-size:.92rem; line-height:1.8;}
+  .stmts{margin:.55rem 0 0; padding:0; list-style:none; display:flex;
+         flex-direction:column; gap:.32rem;}
+  .stmts li{font-size:.88rem; line-height:1.78; padding-left:1.7em; text-indent:-1.7em;}
+  .stmts em{font-style:normal; font-weight:700; color:var(--deep); margin-right:.3em;}
+
+  .chips{display:flex; flex-wrap:wrap; gap:.3rem; margin-top:.7rem;}
+  .chip{font:inherit; font-size:.92rem; min-width:2.1rem; height:2.1rem; padding:0 .35rem;
+        display:inline-flex; align-items:center; justify-content:center;
+        border:1px solid var(--line2); background:transparent; color:var(--ink2);
+        border-radius:2px; cursor:pointer; line-height:1;}
+  .chip:hover{border-color:var(--deep); color:var(--ink);}
+  .chip[aria-pressed="true"]{background:var(--deep); border-color:var(--deep);
+        color:var(--paper); font-weight:700;}
+  .opts{display:flex; flex-direction:column; gap:.28rem; margin-top:.7rem;}
+  .opt{font:inherit; font-size:.87rem; text-align:left; padding:.42rem .7rem;
+       border:1px solid var(--line2); background:transparent; color:var(--ink2);
+       border-radius:2px; cursor:pointer; line-height:1.6;}
+  .opt:hover{border-color:var(--deep); color:var(--ink);}
+  .opt[aria-pressed="true"]{background:var(--deep); border-color:var(--deep);
+       color:var(--paper); font-weight:700;}
+  .pick{margin-top:.45rem; font-size:.79rem; color:var(--ink3); min-height:1.4em;}
+  .pick b{color:var(--ink2); font-weight:700;}
+
+  .verdict{margin-top:.75rem; padding-top:.7rem; border-top:1px dashed var(--line2);
+           font-size:.84rem; line-height:1.8; display:none;}
+  .graded .verdict{display:block;}
+  .mark{font-family:var(--fm); font-weight:700;}
+  .mark.ok{color:var(--ok);} .mark.no{color:var(--no);}
+  .why{color:var(--ink2); margin-top:.3rem;}
+  .src{font-family:var(--fm); font-size:.72rem; color:var(--ink3); margin-top:.35rem;}
+
+  .result{margin-top:3rem; padding:1.4rem 1.3rem; background:var(--surface);
+          border:1px solid var(--line2); border-top:3px solid var(--brass); display:none;}
+  .result.show{display:block;}
+  .result h2{font-family:var(--fd); font-size:1.15rem; font-weight:700; margin-bottom:.3rem;}
+  .total{font-family:var(--fm); font-size:2.4rem; font-weight:700; color:var(--deep);
+         font-variant-numeric:tabular-nums; line-height:1.2;}
+  .total span:last-child{font-size:1rem; color:var(--ink3); font-weight:400;}
+  table{width:100%; border-collapse:collapse; margin-top:1rem; font-size:.85rem;}
+  th,td{text-align:left; padding:.45rem .5rem; border-bottom:1px solid var(--line);}
+  th{font-family:var(--fm); font-size:.7rem; letter-spacing:.1em; text-transform:uppercase;
+     color:var(--ink3); font-weight:400;}
+  td.n{font-family:var(--fm); font-variant-numeric:tabular-nums; text-align:right; white-space:nowrap;}
+  .scroller{overflow-x:auto;}
+
+  footer{margin-top:3rem; padding-top:1.2rem; border-top:1px solid var(--line);
+         font-size:.78rem; color:var(--ink3); line-height:1.9;}
+  @media (prefers-reduced-motion:reduce){*{transition:none!important; animation:none!important;}}
+  /* on narrow screens the top bar wraps to two rows, so pinning the legend
+     under it is unreliable — let it scroll with the passage instead */
+  @media (max-width:560px){ .legend{position:static; max-height:none;} }
+</style>
+
+<div class="bar">
+  <div class="bar-in">
+    <div class="bar-title">모의 기말시험</div>
+    <div class="tally" id="tally">미응답 <b>40</b> / 40</div>
+    <button class="btn" id="grade">채점하기</button>
+    <button class="btn ghost" id="reset">다시 풀기</button>
+    <button class="btn ghost" id="theme" title="라이트 / 다크 전환" aria-label="라이트 / 다크 전환">◐</button>
+  </div>
+</div>
+
+<div class="wrap">
+<header class="top">
+  <div class="eyebrow">2026년도 봄학기 · 예상문제</div>
+  <h1>동남아시아 경제론　기말시험 (모의)</h1>
+  <div class="meta">
+    <span>출제범위 : 제16회~제28회</span>　·　<span>40문항 / 50점</span>　·　<span>전부 객관식</span><br>
+    근거자료 : 2026-SEA216C ~ 228C (배포 레쥬메)
+  </div>
+  <div class="caution">
+    2025년도 기출과 <strong>같은 문제 형식·같은 배점 구성</strong>으로 만들었고, 정답은 모두 <strong>2026년도 레쥬메의 수치</strong>에 맞췄습니다. GMTI는 2021년판이 아니라 <strong>2025년판</strong>, 시장규모는 <strong>2023년</strong>, 이슬람 금융은 <strong>2024~25년 말</strong> 데이터가 근거입니다.<br>
+    실제 시험지는 일본어로 나오므로, <strong>선택지 용어에는 시험에 그대로 등장할 일본어 표기를 괄호로 병기</strong>했습니다. 각 문항 해설에 출처 파일명과 페이지가 있습니다.
+  </div>
+</header>
+
+<div id="exam"></div>
+
+<div class="result" id="result">
+  <h2>채점 결과</h2>
+  <div class="total"><span id="totalTxt">0</span><span> / 50점</span></div>
+  <div class="scroller">
+    <table>
+      <thead><tr><th>대문</th><th>분야</th><th class="n">득점</th><th class="n">정답 수</th></tr></thead>
+      <tbody id="breakdown"></tbody>
+    </table>
+  </div>
+  <p style="margin-top:1rem; font-size:.85rem; color:var(--ink2);" id="advice"></p>
+</div>
+
+<footer>
+  이 모의시험은 배포 레쥬메만을 근거로 만든 예상문제이며, 실제 출제를 보장하지 않습니다.<br>
+  실제 시험에서는 교과서 2권만 반입 가능 (레쥬메·노트 반입 불가). 시험기간은 7월 25일~31일.
+</footer>
+</div>
+
+<script>
+const C = ["①","②","③","④","⑤","⑥","⑦","⑧","⑨","⑩","⑪","⑫","⑬","⑭","⑮","⑯","⑰","⑱","⑲","⑳"];
+const KO = "ㄱㄴㄷ";
+
+const DATA = [
+{
+  num:"I", title:"이슬람의 사고방식", jp:"イスラームの考え方", pts:"2점×5문＝10점", per:2, type:"cloze",
+  instr:"다음 글의 (1)~(5)에 들어갈 말을 ①~⑩ 중에서 각각 하나씩 고르시오. 선택지는 (1)~(5) 공통이다.",
+  legend:["쿠란 (クルアーン)","순나 (スンナ)","하디스 (ハディース)","이즈마 (イジュマー)","키야스 (キヤース)","수라 (スーラ)","아야 (アーヤ)","이바다트 (イバーダート)","무아말라트 (ムアーマラート)","샤리아 (シャリーア)"],
+  passage:[
+    "이슬람의 교의인 이슬람법은 여러 법원(法源)에 근거해 편찬된다. 순니파의 경우 제1의 법원은 신의 말씀인 【1】이며, 이는 114개의 【2】라 불리는 장(章)으로 구성된다. 그러나 거기에는 모순되거나 모호한 대목, 아예 언급이 없는 사안도 있어 현실의 일상생활에 적용하기에는 불충분하다. 그래서 제2의 법원으로, 가장 이상적인 무슬림으로 여겨지는 예언자 무함마드의 언행인 【3】가 사용되며, 그 내용은 무함마드 사후에 전승집으로 정리되었다. 제3의 법원은 이슬람 법학자의 '합의'를 뜻하는 【4】이다.",
+    "이렇게 편찬된 이슬람법의 내용은 규범의 대상에 따라 크게 둘로 나뉜다. 신과 인간의 관계를 정하는 의례적 규범을 【5】라 하며, 인간끼리의 관계를 규정하는 법적 규범과 구별된다."
+  ],
+  qs:[
+    {n:"(1)", a:0, why:"제1의 법원은 <b>쿠란(クルアーン)</b>. ⑩샤리아는 법원이 아니라 법원을 근거로 편찬된 '이슬람법' 그 자체를 가리키므로 혼동 주의.", src:"2026-SEA216C p13~14"},
+    {n:"(2)", a:5, why:"쿠란은 114개의 장＝<b>수라(スーラ)</b>로 이루어지고, 각 장은 다시 절＝아야(⑦アーヤ)로 구성된다. '장'을 묻고 있으므로 ⑦이 아니라 ⑥.", src:"2026-SEA216C p14"},
+    {n:"(3)", a:1, why:"제2의 법원은 <b>순나(スンナ)</b>＝무함마드의 언행 그 자체. ③하디스는 그 순나를 정리해 엮은 '전승집'을 가리키는 별개의 말. 지문의 '그 내용은 …전승집으로 정리되었다'가 구분 단서.", src:"2026-SEA216C p15~16"},
+    {n:"(4)", a:3, why:"제3의 법원은 <b>이즈마(イジュマー, 합의)</b>. 제4는 키야스(⑤キヤース, 유추)이므로 순서와 세트로 외울 것.", src:"2026-SEA216C p13, p17"},
+    {n:"(5)", a:7, why:"의례적 규범＝<b>이바다트(イバーダート)</b>, 인간끼리의 관계를 규정하는 법적 규범＝무아말라트(⑨ムアーマラート). 이 짝은 매년 나오는 단골.", src:"2026-SEA216C p12, p18"}
+  ]
+},
+{
+  num:"II", title:"이슬람과 사회경제", jp:"イスラームと社会経済", pts:"1점×10문＝10점", per:1, type:"triple",
+  instr:"(6)~(15)의 할랄 산업 관련 용어·개념을 설명하는 ㄱ·ㄴ·ㄷ 중 옳은 것만을 고른 조합을 ①~⑤ 중에서 각각 하나씩 고르시오. 선택지는 (6)~(15) 공통이다.",
+  legend:["ㄱ·ㄴ","ㄱ·ㄷ","ㄴ·ㄷ","ㄱ·ㄴ·ㄷ (전부 옳음)","없음 (전부 틀림)"],
+  qs:[
+    {n:"(6)", t:"할랄 산업의 정의", s:[
+      "예배용 융단이나 키블라 컴퍼스의 제조업은 협의의 할랄 산업에 포함된다.",
+      "자동차나 전자기기의 제조업은 광의의 할랄 산업에 포함된다.",
+      "묵주(로사리오)나 하마야(破魔矢)의 제조·판매업은 할랄 산업에 포함되지 않는다."],
+      a:3, why:"셋 다 옳다. <b>협의</b>＝의례에 쓰는 도구(예배용 융단·키블라 컴퍼스·부적), <b>광의</b>＝무슬림이 사용할 수 있는 모든 산업(자동차·전자기기·교육), <b>불포함</b>＝샤리아가 금하는 행위(도박·매춘·음주·점술)와 타종교 관련(묵주·하마야). 이 3층 구조로 정리할 것.", src:"2026-SEA218C p8~9, p12"},
+    {n:"(7)", t:"할랄 산업의 성립 조건", s:[
+      "할랄 산업이 성립하는 조건으로서, 상품·서비스의 기준은 반드시 명문화되어 있어야 한다.",
+      "말레이시아에서는 할랄 항공산업과 할랄 가상이동체통신업이 모두 산업으로 확립되어 있다.",
+      "할랄 산업 전체의 시장규모는 2019년부터 2023년에 걸쳐 일관되게 축소되고 있다."],
+      a:4, why:"셋 다 틀렸다. ㄱ＝기준은 '명문화된 경우도, 안 된 경우도 있다'. ㄴ＝둘 다 동종 타사가 이어지지 않아 '산업으로 성립했다고 하기 어렵다'. ㄷ＝2023년은 7조 3,570억 달러로 2019년보다 확대.", src:"2026-SEA218C p10~11, p18"},
+    {n:"(8)", t:"할랄 산업의 명칭", s:[
+      "Shari'ah compliant라는 명칭은 주로 금융산업에서 쓰인다.",
+      "Muslim-friendly라는 명칭은 주로 금융산업에서 쓰인다.",
+      "할랄 에코시스템이란 상류에서 하류까지 할랄(산업)로 완결되는 경제를 가리킨다."],
+      a:1, why:"ㄴ이 틀렸다. <b>Shari'ah compliant＝금융</b> / <b>Muslim-friendly＝관광</b>이 대응. 이 밖에 Islamic(주로 무슬림이 사용), Halal(무슬림·비무슬림 모두 사용). ㄷ의 에코시스템은 '돼지고기 금지가 축산→식품→유통→금융까지 미친다'는 예로 설명된다.", src:"2026-SEA218C p13~14"},
+    {n:"(9)", t:"시장규모 (2023년)", s:[
+      "할랄 산업 전체의 시장규모는 7조 3,570억 미국 달러이다.",
+      "7개 분야 중 시장규모가 가장 큰 것은 할랄 식품이다.",
+      "7개 분야 중 시장규모가 가장 작은 것은 화장품이다."],
+      a:1, why:"ㄴ이 틀렸다. 2023년 최대 분야는 <b>이슬람 금융(4,925)</b>으로 할랄 식품(1,434)을 크게 웃돈다. 최소는 화장품(87)이며 의약품(107)보다 작다. 단위는 10억 달러.", src:"2026-SEA218C p18"},
+    {n:"(10)", t:"시장규모 산출 방법과 점유율", s:[
+      "이슬람 금융의 시장규모는 이슬람 금융기관이 보유한 자산을 기준으로 산출된다.",
+      "이슬람 금융 이외 분야의 시장규모는 매출액을 기준으로 산출된다.",
+      "2022년 점유율에서는 이슬람 금융이 할랄 식품을 웃돈다."],
+      a:0, why:"ㄷ이 틀렸다. 점유율은 <b>할랄 식품 16.6% > 이슬람 금융 3.0%</b>. 금융은 시장규모(＝자산 잔액)는 최대지만 각 산업 전체에서 차지하는 비율은 최소급이라는 '뒤틀림'이 노려지기 쉽다.", src:"2026-SEA218C p19, p21"},
+    {n:"(11)", t:"할랄 식품", s:[
+      "할랄 식품 산업은 식품가공업에 한정되며, 레스토랑업이나 케이터링업은 포함되지 않는다.",
+      "소비액 상위 5개국 중 1위는 인도네시아이다.",
+      "할랄 인증에는 트레이서빌리티(추적가능성)의 사고방식이 쓰인다."],
+      a:2, why:"ㄱ이 틀렸다. 식품가공 외에 <b>레스토랑·케이터링·축산·패키지·식기</b>까지 포함한다. 소비액 상위는 ①인도네시아 ②터키 ③파키스탄 ④이집트 ⑤방글라데시로, 무슬림 인구가 많은 나라가 늘어선다.", src:"2026-SEA218C p17, p20~22"},
+    {n:"(12)", t:"미디어·오락", s:[
+      "GPS 기능으로 현재지와 방위를 확정해 예배 시간과 방향을 표시하는 앱이 있다.",
+      "할랄 레스토랑이나 호텔의 리뷰 사이트는 이 분야의 대상에 포함되지 않는다.",
+      "일부 이슬람 국가에서는 인터넷 접속이 제한되어 개발과 배포에 지장을 주고 있다."],
+      a:1, why:"ㄴ이 틀렸다. <b>리뷰 사이트도 대상에 포함</b>된다(그 밖에 쿠란·하디스 검색, EC 사이트, 자카트 납부 사이트, 연동 광고). 비판받은 예로 포켓몬 GO가 나온다.", src:"2026-SEA218C p28~30"},
+    {n:"(13)", t:"패션", s:[
+      "복장에 지역차가 생기는 원인으로 법학파의 차이, 기후의 차이, 서양문화와의 접촉 빈도 등을 지적할 수 있다.",
+      "베일 착용률은 정부의 의무화 여부 등에 따라 국가·지역마다 다르다.",
+      "소비액 상위국은 터키, UAE, 나이지리아이다."],
+      a:3, why:"셋 다 옳다. 지역차의 요인은 ①법학파 ②기후 ③서양문화와의 접촉 ④이슬람 이전의 문화 ⑤세대 ⑥TPO ⑦유행의 7가지. 다만 <b>생산액</b> 상위는 중국·인도·터키로 반드시 이슬람 국가는 아니라는 점과 혼동하지 말 것.", src:"2026-SEA218C p31~32"},
+    {n:"(14)", t:"의약품", s:[
+      "돼지 유래 젤라틴을 사용한 캡슐제는 이슬람에 맞는 의약품으로 간주되지 않는다.",
+      "소비국 상위는 터키, 사우디아라비아, 미국이다.",
+      "생산국 상위는 인도네시아, 말레이시아, 터키이다."],
+      a:0, why:"ㄷ이 틀렸다. <b>생산국 상위는 프랑스·독일·영국</b>으로 이슬람 국가가 아니다. '소비는 이슬람 국가 / 생산은 유럽'이라는 비대칭이 핵심. 2023년 시장규모는 약 1,070억 달러.", src:"2026-SEA218C p34"},
+    {n:"(15)", t:"화장품", s:[
+      "예배 전의 정결례(우두)를 위해 침투성이 높은 매니큐어가 개발되어 있다.",
+      "매출 구성비가 가장 높은 것은 스킨케어 상품이다.",
+      "시장규모는 의약품을 웃돈다."],
+      a:0, why:"ㄷ이 틀렸다. 화장품 시장규모는 <b>의약품의 7할 정도</b>(87 대 107). 구성비는 스킨케어 27% > 메이크업 20% ＝ 헤어케어 20% > 향수 10%. 발수성이 높은 매니큐어는 우두를 방해해 예배가 무효가 되므로 침투성이 높은 제품이 개발되었다.", src:"2026-SEA218C p35"}
+  ]
+},
+{
+  num:"III", title:"할랄 식품", jp:"ハラール食品", pts:"1점×10문＝10점", per:1, type:"cloze",
+  instr:"말레이시아의 할랄 인증제도에 관한 다음 글을 읽고, (16)~(25)에 들어갈 말·수치 등을 ①~⑳ 중에서 각각 하나씩 고르시오. 선택지는 (16)~(25) 공통이다.",
+  legend:["JAKIM","BPJPH","LPPOM-MUI","MUIS","MS1500:2019","MS2610:2015","MS2424:2019","2년간","4년간","교차오염 (交差汚染)","세르투 세정 (スルトゥ)","나주스 (ナジュス)","토이입 (トイイブ)","상품명 (商品名)","제조위탁 (製造委託)","합작회사 설립 (合弁企業)","코피 루왁 (コピ・ルアク)","타파이 (タパイ)","큐피 (キユーピー)","골든 튠 (ゴールデン・チューン)"],
+  passage:[
+    "말레이시아에서 식품을 대상으로 하는 할랄 인증은, 1974년부터 인증기관으로 업무를 수행해 온 총리부 이슬람개발국 【16】이, 과학기술혁신부 기준국이 정한 기준 【17】에 근거해 실시한다. 인증의 유효기간은 【18】이며, 기간이 지나면 다시 심사를 받아야 한다. 또 원재료 공급처나 제조라인이 바뀐 경우에는 기간 내라도 재심사 대상이 된다.",
+    "이 기준은 샤리아법과 파트와에 근거해 불결하다고 간주되는 것(개·돼지와 그 파생물, 사람이나 동물의 배설물, 썩은 고기, 하무르 등)을 【19】라고 정의한다. 여기에 접촉한 신체·의복·기구는 천연수로 7회(그중 1회는 흙을 섞은 물) 씻는 【20】에 의해 정화된다. 또 시설에 대해서는 원재료부터 완제품까지의 흐름에서 【21】을 방지해야 한다고 정하고, 포장과 라벨 표시에 대해서는 소비자의 혼동을 피하기 위해 햄, 바쿠테, 베이컨 등 논할랄 제품에서 따온 【22】을 붙여서는 안 된다고 규정한다.",
+    "다만 인증 기준은 나라·단체에 따라 다르다. 현지 문화와 관련된 예로, 말레이시아는 사향고양이의 똥에서 채취한 커피인 【23】에 대해, 원두 상태가 유지되어 발아할 수 있을 것, 똥에서 채취한 뒤 곧바로 세척될 것이라는 두 조건을 충족하면 할랄로 인정하고 있다.",
+    "일본 기업의 대응도 제각각이다. 무인양품은 말레이시아 제조사인 Brahim's에 【24】을 하고, 완제품을 역수입해 일본의 자사 브랜드·매장에서 판매했다. 한편 【25】는 패키지에 그려진 캐릭터가 '천사이며 우상숭배에 해당한다'고 JAKIM 조사관에게 지적받아, 일러스트에서 날개를 삭제해 문제를 피했다."
+  ],
+  qs:[
+    {n:"(16)", a:0, why:"말레이시아의 인증기관은 <b>JAKIM</b>(총리부 이슬람개발국). ②BPJPH와 ③LPPOM-MUI는 인도네시아, ④MUIS는 싱가포르. 국가와 단체명의 대응은 필출.", src:"2026-SEA220C p9, 2026-SEA221C p6~8"},
+    {n:"(17)", a:4, why:"식품 기준은 <b>MS1500:2019</b>(제3차 개정판). ⑥MS2610:2015는 관광(호텔·투어·가이드), ⑦MS2424:2019는 의약품. 번호와 대상의 조합으로 노려진다.", src:"2026-SEA220C p8~9"},
+    {n:"(18)", a:7, why:"유효기간은 <b>2년간</b>. 큐피 사례에서도 '유효기간(2년간) 전에 재인증 절차 개시'로 나온다.", src:"2026-SEA220C p17, 2026-SEA221C p31"},
+    {n:"(19)", a:11, why:"불결한 것＝<b>나주스(najs / ナジュス)</b>. 대비되는 ⑬토이입(toyyib)은 '좋은·건강에 이로운'이라는 뜻으로, 할랄과 세트로 '할랄란 토이이반'이라 쓴다. 나주스와 토이입을 뒤바꾸는 문제가 단골.", src:"2026-SEA219C p18~19, 2026-SEA220C p22~23"},
+    {n:"(20)", a:10, why:"나주스에 접촉한 것을 정화하는 세정이 <b>세르투(sertu / スルトゥ)</b>. '천연수로 7회, 그중 1회는 흙을 섞은 물'이라는 구체적 절차까지 외울 것.", src:"2026-SEA220C p24, p18 (첨부문서 A)"},
+    {n:"(21)", a:9, why:"시설 레이아웃과 흐름에서 막아야 할 것은 <b>교차오염(交差汚染)</b>. 요건 4-2 '시설과 설비'에 명기되어 있다.", src:"2026-SEA220C p28"},
+    {n:"(22)", a:13, why:"논할랄 제품에서 따온 <b>상품명(商品名)</b>을 붙여서는 안 된다(햄, 바쿠테＝肉骨茶, 베이컨, 비어, 럼 등). 명칭의 부적절함은 심사 대상 제외 사유도 된다('할랄 비어' 등).", src:"2026-SEA220C p44, p15"},
+    {n:"(23)", a:16, why:"사향고양이(자바어 luwak)의 똥에서 채취하는 고급 커피가 <b>코피 루왁</b>. ⑱타파이는 쌀·타피오카를 발효시킨 저알코올 전통주로, '취하게 하지 않으므로 할랄'로 인정된 별개 사례. 둘은 세트로 출제된다.", src:"2026-SEA221C p18~23"},
+    {n:"(24)", a:14, why:"무인양품은 현지 제조사에 <b>제조위탁</b>을 하고 완제품을 역수입해 자사 브랜드로 판매. ⑯합작회사 설립은 별개 선택지(현지 기업과 공동으로 회사를 세우는 형태). 인증은 JAKIM에서 취득했다.", src:"2026-SEA221C p25~26, p29~30"},
+    {n:"(25)", a:18, why:"캐릭터 디자인(큐피드＝천사)이 문제가 된 것은 <b>큐피(キユーピー)</b>. ⑳골든 튠은 호주의 버터 제조사로 돼지 DNA가 검출된 별개의 실패 사례. 아지노모토(인도네시아 / 돼지 유래 효소)와 함께 기업 사례는 3개를 나란히 정리할 것.", src:"2026-SEA221C p26, p31~32, p36~37"}
+  ]
+},
+{
+  num:"IV", title:"투어리즘", jp:"ツーリズム", pts:"1점×10문＝10점", per:1, type:"cloze",
+  instr:"무슬림의 관광에 관한 다음 글을 읽고, (26)~(35)에 들어갈 말·수치 등을 ①~⑳ 중에서 각각 하나씩 고르시오. 선택지는 (26)~(35) 공통이다.",
+  legend:["무살라 (ムサッラ)","키블라 (キブラ)","사자다 (サジャーダ)","이슬라모포비아 (イスラーモフォビア)","라마단월 서비스 (ラマダーン月のサービス)","현지 무슬림과의 교류","약 3할","약 5할","14위","7위","교통 인프라 (交通インフラ)","커뮤니케이션 (コミュニケーション)","관계자의 인식 (関係者の意識)","치안 (治安)","예배소 (礼拝所)","공항 (空港)","마케팅 (マーケティング)","남관동권 (南関東圏)","간사이권 (関西圏)","도카이권 (東海圏)"],
+  passage:[
+    "크레센트 레이팅(Crescent Rating)사의 조사에 따르면, 무슬림 관광객이 여행지에 바라는 항목은 요구의 강도에 따라 세 가지로 나뉜다. 우선 4분의 3 이상이 '매우 중요' '대체로 중요'라고 답한 Need to Have에는, 할랄 식사, 수세식 화장실, 여행지 주민의 무슬림에 대한 혐오감·공포감 즉 【26】가 없을 것, 그리고 모스크나 공항의 예배 공간인 【27】 등 예배시설이 있을 것이 포함된다. 다음으로 3분의 2 정도가 '중요'라고 답한 Good to Have에는, 사후르와 이프타르의 시간과 식사를 배려하는 【28】가 포함된다. 그리고 2분의 1 정도가 '중요'라고 답한 Nice to Have에는 '할랄이 아닌 활동은 하지 않는다'가 포함되지만, 동시에 이 항목에 대해 【29】의 관광객이 '중요하지 않다'고 답해, 무슬림 내부에도 생각의 차이가 있음을 알 수 있다.",
+    "같은 회사의 “Global Muslim Travel Index 2025”에 따르면, 일본은 OIC 비가맹국 가운데 【30】의 평가를 받았다. 소항목별로 보면, 국내 이동의 편의성을 재는 【31】은 98점으로 공동 1위, 치안은 84점으로 공동 10위로, 이슬람과 직접 관련이 없는 항목에서 평가가 높다. 반면 주요 10개 언어의 통용도를 재는 【32】은 8점으로 123위, 현지 여행 관계자의 이슬람 지식 습득도를 재는 【33】도 8점으로 98위로 낮아, 현장 개개인의 대응 능력 부족이 과제다. 나아가 무슬림 이용자 대응으로 평가되는 【34】는 10점에 그쳐, 21개국이 나란한 공동 133위로 최하위였다.",
+    "참고로 일본의 할랄 레스토랑의 도도부현별 분포는, 타베로그 등에 따르면 【35】에 가장 집중되어 있다."
+  ],
+  qs:[
+    {n:"(26)", a:3, why:"차별의식·혐오감＝<b>이슬라모포비아(Islamophobia)</b>. Need to Have의 4항목은 ①할랄 식사 ②예배시설 ③수세식 화장실 ④차별의식 없음.", src:"2026-SEA224C p48~49"},
+    {n:"(27)", a:0, why:"예배를 위해 제공되는 장소·공간·방이 <b>무살라(ムサッラ)</b>. ②키블라는 메카의 방향, ③사자다는 예배용 융단(매트). 이 세 단어의 구별은 빈출.", src:"2026-SEA223C p19, 2026-SEA224C p48"},
+    {n:"(28)", a:4, why:"Good to Have는 ①<b>라마단월 서비스</b> ②현지 무슬림과의 교류(⑥) 2항목. 사후르＝새벽 전 식사, 이프타르＝일몰 후 식사이므로 이 단어가 나오면 라마단 관련으로 판단.", src:"2026-SEA224C p50~51"},
+    {n:"(29)", a:6, why:"'방문해도 상관없다'고 생각하는 무슬림도 <b>약 3할(30%)</b> 있다고 명기되어 있다. ⑧약 5할은 Nice to Have의 해당 비율(2분의 1)과의 함정.", src:"2026-SEA224C p47, p52"},
+    {n:"(30)", a:8, why:"GMTI <b>2025년판</b>에서 일본은 OIC 비가맹국 중 <b>14위</b>(51점). ※2021년판에 근거한 작년 기출에서는 다른 순위였으므로 반드시 2025년판으로 다시 외울 것. 1위 싱가포르(71), 2위 영국(63), 3위 홍콩(62), 15위 한국(50).", src:"2026-SEA225B p42"},
+    {n:"(31)", a:10, why:"국내 이동의 편의성＝<b>교통 인프라</b>로 98점(공동 1위, 평균 65.22). 일본이 Top10에 든 항목은 교통 인프라·치안·신앙제한·지속가능성·마케팅(11위).", src:"2026-SEA225B p41, p43"},
+    {n:"(32)", a:11, why:"주요 10개 언어의 통용도＝<b>커뮤니케이션 숙련도</b>로 8점·123위. ⑰마케팅은 58점·11위로 고평가이므로 혼동하지 말 것.", src:"2026-SEA225B p41, p43"},
+    {n:"(33)", a:12, why:"현지 여행 관계자의 이슬람 지식 습득도＝<b>관계자의 인식</b>으로 8점·98위. 커뮤니케이션과 함께 '현장 대응력 부족'을 보여주는 2항목.", src:"2026-SEA225B p41, p43"},
+    {n:"(34)", a:14, why:"<b>예배소</b>가 10점으로 공동 133위 최하위(21개국). 서비스 항목(배점 40%) 중 예배소와 할랄 식사는 각 10%로 비중이 커서 일본의 종합순위를 끌어내리고 있다.", src:"2026-SEA225B p41, p43"},
+    {n:"(35)", a:17, why:"도쿄 387·사이타마 59·가나가와 52·지바 42로 <b>남관동권</b>이 압도적(타베로그, 2026년 6월 1일 현재). 다음이 간사이권·도카이권. 전국 합계는 타베로그 912개, 할랄구르메재팬 823개.", src:"2026-SEA225B p23~24"}
+  ]
+},
+{
+  num:"V", title:"이슬람 금융", jp:"イスラーム金融", pts:"2점×5문＝10점", per:2, type:"binary",
+  instr:"(36)~(40)의 이슬람 은행에 관한 각 문장은 말레이시아와 인도네시아 중 어느 쪽을 설명한 것인지 ①·② 중에서 각각 고르시오. 선택지는 (36)~(40) 공통이다. 각 문장은 2024년 말~2025년 말 현재의 데이터에 근거한다.",
+  legend:["말레이시아","인도네시아"],
+  qs:[
+    {n:"(36)", t:"이 나라의 이슬람 은행업 근거법은 2008년에 신설된 샤리아 은행법이다.",
+     a:1, why:"<b>인도네시아</b>. 1992년 은행법 개정으로 이슬람 은행 설립이 가능해졌고, 1998년 개정으로 겸업이 가능해졌으며, 2008년 6월 이슬람 은행만을 대상으로 하는 샤리아 은행법을 신설. 말레이시아는 1983년 최초 은행, 1989년 이슬람 은행법, 현행은 2013년 이슬람 금융서비스법.", src:"2026-SEA228C p11, p31~32"},
+    {n:"(37)", t:"이 나라에서는 계약형태별 융자잔액 중 타와룩이 6할을 넘어 비율이 가장 높다.",
+     a:0, why:"<b>말레이시아</b>. 타와룩 64.81%, 이자라 14.99%, 무샤라카 8.92%, 무라바하 8.21%. 인도네시아는 무샤라카 약 50%·무라바하 약 41%로 손익공유형이 중심이라는 대조를 이룬다.", src:"2026-SEA228C p28~29, p49"},
+    {n:"(38)", t:"이 나라의 이슬람 은행 총자산은 기존형 은행 총자산 대비 9.59%이다.",
+     a:1, why:"<b>인도네시아</b>. 총자산 955조 루피아(약 8조 5,100억 엔)로 기존형 은행 대비 9.59%. 말레이시아는 약 5할(50% 전후)에 달하며, 이 '약 5할 대 약 1할'이라는 자릿수 차이가 가장 중요한 대비.", src:"2026-SEA228C p11, p31, p41"},
+    {n:"(39)", t:"이 나라에서는 이슬람 은행의 융자처 중 가계부문이 약 7할을 차지해, 다른 한쪽 나라보다 높다.",
+     a:0, why:"<b>말레이시아</b>. 가계부문 69.72%(2025년 12월). 목적별로도 자가용 구입·주택용 부동산 구입·개인 사용이 57.88%로 과반. 인도네시아의 가계는 거의 절반이며, 그중 주택 소유가 29.08%.", src:"2026-SEA228C p25~27, p44, p49"},
+    {n:"(40)", t:"이 나라에서는 국가샤리아협의회·샤리아은행위원회·샤리아감시위원회라는 3층의 샤리아 보드가 설치되어 있다.",
+     a:1, why:"<b>인도네시아</b>(이슬람 단체 / 중앙은행 / 각 시중은행의 3층). 말레이시아는 중앙은행의 Shariah Advisory Council(재무장관의 조언에 따라 국왕이 임명)과 각 은행의 Shariah Supervisory Council의 2층 구조.", src:"2026-SEA228C p18~19, p31"}
+  ]
+}];
+
+const ans = {};
+let graded = false;
+
+function el(tag, cls, html){ const e=document.createElement(tag); if(cls)e.className=cls; if(html!=null)e.innerHTML=html; return e; }
+
+function build(){
+  const root = document.getElementById('exam');
+  root.textContent = '';
+  DATA.forEach((sec, si)=>{
+    const s = el('section');
+    const h = el('div','sec-head');
+    h.append(el('span','sec-num', sec.num+'.'), el('h2','sec-title', sec.title),
+             el('span','sec-jp', sec.jp), el('span','sec-pts', sec.pts));
+    s.append(h, el('p','sec-instr', sec.instr));
+
+    const lg = el('div','legend');
+    lg.append(el('span','legend-lab','선택지'));
+    sec.legend.forEach((t,i)=> lg.append(el('i',null,'<b>'+C[i]+'</b>'+t)));
+    s.append(lg);
+
+    if(sec.passage){
+      const p = el('div','passage');
+      sec.passage.forEach(txt=>{
+        p.append(el('p', null, txt.replace(/【(\d+)】/g, (m,g)=>'<span class="blank">( '+g+' )</span>')));
+      });
+      s.append(p);
+    }
+
+    sec.qs.forEach((q, qi)=>{
+      const box = el('div','q'); box.dataset.s=si; box.dataset.q=qi;
+      const head = el('div','q-head');
+      head.append(el('span','q-no', q.n));
+      if(q.t) head.append(el('span','q-text', q.t));
+      box.append(head);
+
+      if(q.s){
+        const ul = el('ul','stmts');
+        q.s.forEach((t,i)=> ul.append(el('li',null,'<em>'+KO[i]+')</em>'+t)));
+        box.append(ul);
+      }
+
+      const useRows = (sec.type!=='cloze');
+      const holder = el('div', useRows?'opts':'chips');
+      const pick = el('div','pick','');
+      sec.legend.forEach((lab,i)=>{
+        const b = el('button', useRows?'opt':'chip', useRows ? C[i]+' '+lab : C[i]);
+        b.type='button'; b.setAttribute('aria-pressed','false');
+        b.title = C[i]+' '+lab;
+        b.addEventListener('click', ()=>{
+          if(graded) return;
+          ans[si+'-'+qi]=i;
+          [...holder.children].forEach((c,ci)=> c.setAttribute('aria-pressed', ci===i?'true':'false'));
+          pick.innerHTML = '선택 : <b>'+C[i]+' '+lab+'</b>';
+          updateTally();
+        });
+        holder.append(b);
+      });
+      box.append(holder, pick, el('div','verdict'));
+      s.append(box);
+    });
+    root.append(s);
+  });
+  updateTally();
+}
+
+function total(){ let n=0; DATA.forEach(s=> n+=s.qs.length); return n; }
+
+function updateTally(){
+  const done = Object.keys(ans).length, all = total();
+  document.getElementById('tally').innerHTML = graded ? '채점 완료' : '미응답 <b>'+(all-done)+'</b> / '+all;
+}
+
+function grade(){
+  graded = true;
+  let score=0; const rows=[];
+  DATA.forEach((sec,si)=>{
+    let sc=0, correct=0;
+    sec.qs.forEach((q,qi)=>{
+      const box = document.querySelector('.q[data-s="'+si+'"][data-q="'+qi+'"]');
+      const chosen = ans[si+'-'+qi];
+      const ok = chosen===q.a;
+      if(ok){ sc+=sec.per; correct++; }
+      box.classList.add('graded', ok?'right':'wrong');
+      const yours = chosen==null ? '미응답' : C[chosen]+' '+sec.legend[chosen];
+      box.querySelector('.verdict').innerHTML =
+        '<span class="mark '+(ok?'ok':'no')+'">'+(ok?'정답':'오답')+'</span>'
+        + '　정답 : <b>'+C[q.a]+' '+sec.legend[q.a]+'</b>'
+        + (ok?'':'　내 답 : '+yours)
+        + '<div class="why">'+q.why+'</div>'
+        + '<div class="src">출처 : '+q.src+'</div>';
+      box.querySelectorAll('button').forEach(b=> b.disabled=true);
+    });
+    score+=sc;
+    rows.push('<tr><td>'+sec.num+'. '+sec.title+'</td><td>'+sec.jp+'</td><td class="n">'+sc+' / 10</td><td class="n">'+correct+' / '+sec.qs.length+'</td></tr>');
+  });
+  document.getElementById('totalTxt').textContent = score;
+  document.getElementById('breakdown').innerHTML = rows.join('');
+  const weak = DATA.filter((sec,si)=> sec.qs.filter((q,qi)=> ans[si+'-'+qi]===q.a).length / sec.qs.length < 0.7)
+                   .map(s=>s.num+'. '+s.title);
+  document.getElementById('advice').innerHTML = weak.length
+    ? '약한 분야 : <strong>'+weak.join('　/　')+'</strong>　해설의 출처를 따라가 해당 레쥬메 페이지를 복습하세요.'
+    : '전 분야 7할 이상. 수치·순위까지 잡혀 있습니다.';
+  document.getElementById('result').classList.add('show');
+  updateTally();
+  document.getElementById('result').scrollIntoView({behavior:'smooth', block:'start'});
+}
+
+document.getElementById('grade').addEventListener('click', grade);
+document.getElementById('reset').addEventListener('click', ()=>{
+  graded=false; Object.keys(ans).forEach(k=> delete ans[k]);
+  document.getElementById('result').classList.remove('show');
+  build(); window.scrollTo({top:0, behavior:'smooth'});
+});
+build();
+</script>
+
+<script>
+(function(){
+  var root = document.documentElement, KEY = 'sea-mock-theme';
+  // file:// 로 열면 localStorage 접근이 막히는 경우가 있어 전부 감싼다
+  function load(){ try { return localStorage.getItem(KEY); } catch(e){ return null; } }
+  function save(v){ try { localStorage.setItem(KEY, v); } catch(e){} }
+  var saved = load();
+  if(saved) root.setAttribute('data-theme', saved);
+  document.getElementById('theme').addEventListener('click', function(){
+    var dark = matchMedia('(prefers-color-scheme: dark)').matches;
+    var cur = root.getAttribute('data-theme') || (dark ? 'dark' : 'light');
+    var next = cur === 'dark' ? 'light' : 'dark';
+    root.setAttribute('data-theme', next);
+    save(next);
+  });
+})();
+</script>
+</body>
+</html>

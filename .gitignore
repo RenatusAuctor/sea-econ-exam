@@ -1,0 +1,5 @@
+# 강의 자료(PDF 등)는 저장소에 올리지 않는다 — 화이트리스트 방식
+*
+!.gitignore
+!README.md
+!index.html
