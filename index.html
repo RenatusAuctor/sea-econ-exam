@@ -3,10 +3,10 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>동남아시아 경제론 기말 모의시험 (2026년도 자료판)</title>
+<title>동남아시아 경제론 기말대책 (2026년도 자료판)</title>
 <style>
   *,*::before,*::after{box-sizing:border-box}
-  body,h1,h2,h3,p,ul,ol,figure,blockquote{margin:0}
+  body,h1,h2,h3,h4,p,ul,ol,figure,blockquote{margin:0}
   ul,ol{padding:0}
   button,input,select,textarea{font-family:inherit; font-size:100%}
   img,svg{max-width:100%; display:block}
@@ -75,7 +75,20 @@
        cursor:pointer;}
   .btn:hover{opacity:.87}
   .btn.ghost{background:transparent; color:var(--ink2); border-color:var(--line2);}
-  .btn:focus-visible,.chip:focus-visible,.opt:focus-visible{outline:2px solid var(--brass); outline-offset:2px;}
+  .btn:focus-visible,.chip:focus-visible,.opt:focus-visible,.tab:focus-visible{outline:2px solid var(--brass); outline-offset:2px;}
+  .hide{display:none !important;}
+
+  .tabs{max-width:47rem; margin:0 auto; padding:0 1.25rem; display:flex; gap:.15rem;
+        border-top:1px solid var(--line); overflow-x:auto;}
+  .tab{font:inherit; font-size:.83rem; padding:.5rem .85rem; background:transparent;
+       border:0; border-bottom:2px solid transparent; color:var(--ink3);
+       cursor:pointer; white-space:nowrap;}
+  .tab span{font-family:var(--fm); font-size:.68rem; color:var(--ink3); margin-left:.35rem;}
+  .tab:hover{color:var(--ink2);}
+  .tab[aria-selected="true"]{color:var(--ink); border-bottom-color:var(--brass); font-weight:700;}
+
+  .view{display:none;}
+  .view.on{display:block;}
 
   header.top{padding:2.75rem 0 1.5rem; border-bottom:2px solid var(--deep);}
   .eyebrow{font-family:var(--fm); font-size:.7rem; letter-spacing:.16em;
@@ -97,10 +110,8 @@
            font-variant-numeric:tabular-nums;}
   .sec-instr{font-size:.85rem; color:var(--ink2); margin-top:.7rem;}
 
-  .legend{position:sticky; top:3.75rem; z-index:20; margin-top:.8rem;
-          background:var(--surface2); border:1px solid var(--line);
-          padding:.55rem .8rem; font-size:.78rem; line-height:1.9;
-          max-height:7.6rem; overflow-y:auto;}
+  .legend{margin-top:.8rem; background:var(--surface2); border:1px solid var(--line);
+          padding:.55rem .8rem; font-size:.78rem; line-height:1.9;}
   .legend-lab{font-family:var(--fm); font-size:.68rem; letter-spacing:.12em;
               text-transform:uppercase; color:var(--ink3); margin-right:.4rem;}
   .legend i{font-style:normal; color:var(--ink2); margin-right:.8rem; white-space:nowrap;}
@@ -165,25 +176,53 @@
   td.n{font-family:var(--fm); font-variant-numeric:tabular-nums; text-align:right; white-space:nowrap;}
   .scroller{overflow-x:auto;}
 
+  /* ── 포인트 노트 ── */
+  .note{margin-top:2.4rem;}
+  .note-head{display:flex; align-items:baseline; gap:.6rem; flex-wrap:wrap;
+             padding-bottom:.4rem; border-bottom:2px solid var(--deep);}
+  .note-no{font-family:var(--fm); font-size:.72rem; letter-spacing:.1em; color:var(--brass);
+           border:1px solid var(--brass); padding:.1rem .45rem; border-radius:2px; flex:none;}
+  .note-title{font-family:var(--fd); font-size:1.12rem; font-weight:700;}
+  .note-jp{font-size:.76rem; color:var(--ink3);}
+  .note h4{font-size:.87rem; font-weight:700; color:var(--deep); margin:1.1rem 0 .35rem;}
+  .note ul{list-style:none; display:flex; flex-direction:column; gap:.25rem;}
+  .note ul li{font-size:.86rem; line-height:1.8; padding-left:1.1em; text-indent:-1.1em; color:var(--ink2);}
+  .note ul li::before{content:"·　"; color:var(--brass);}
+  .note ul li b{color:var(--ink);}
+  .note table{margin-top:.5rem; font-size:.82rem;}
+  .note table b{color:var(--ink);}
+  .warn{margin-top:.6rem; padding:.55rem .8rem; background:var(--no-soft);
+        border-left:3px solid var(--no); font-size:.8rem; line-height:1.8; color:var(--ink2);}
+  .warn b{color:var(--ink);}
+  .toc{margin-top:1.2rem; padding:.9rem 1rem; background:var(--surface2); border:1px solid var(--line);
+       font-size:.83rem; line-height:2;}
+  .toc a{color:var(--ink2); text-decoration:none; border-bottom:1px solid var(--line2); margin-right:.9rem; white-space:nowrap;}
+  .toc a:hover{color:var(--ink); border-bottom-color:var(--brass);}
+
   footer{margin-top:3rem; padding-top:1.2rem; border-top:1px solid var(--line);
          font-size:.78rem; color:var(--ink3); line-height:1.9;}
   @media (prefers-reduced-motion:reduce){*{transition:none!important; animation:none!important;}}
-  /* on narrow screens the top bar wraps to two rows, so pinning the legend
-     under it is unreliable — let it scroll with the passage instead */
-  @media (max-width:560px){ .legend{position:static; max-height:none;} }
 </style>
 
 <div class="bar">
   <div class="bar-in">
-    <div class="bar-title">모의 기말시험</div>
+    <div class="bar-title">동남아시아 경제론 기말대책</div>
     <div class="tally" id="tally">미응답 <b>40</b> / 40</div>
     <button class="btn" id="grade">채점하기</button>
     <button class="btn ghost" id="reset">다시 풀기</button>
     <button class="btn ghost" id="theme" title="라이트 / 다크 전환" aria-label="라이트 / 다크 전환">◐</button>
   </div>
+  <div class="tabs" role="tablist">
+    <button class="tab" data-view="mock" role="tab" aria-selected="true">모의시험<span>40문·50점</span></button>
+    <button class="tab" data-view="plus" role="tab" aria-selected="false">보충문제<span>60문·60점</span></button>
+    <button class="tab" data-view="note" role="tab" aria-selected="false">포인트 노트<span>제16~28회</span></button>
+  </div>
 </div>
 
 <div class="wrap">
+
+<!-- ══════════ 모의시험 ══════════ -->
+<div class="view on" id="v-mock">
 <header class="top">
   <div class="eyebrow">2026년도 봄학기 · 예상문제</div>
   <h1>동남아시아 경제론　기말시험 (모의)</h1>
@@ -196,23 +235,401 @@
     실제 시험지는 일본어로 나오므로, <strong>선택지 용어에는 시험에 그대로 등장할 일본어 표기를 괄호로 병기</strong>했습니다. 각 문항 해설에 출처 파일명과 페이지가 있습니다.
   </div>
 </header>
-
-<div id="exam"></div>
-
-<div class="result" id="result">
+<div id="exam-mock"></div>
+<div class="result" id="result-mock">
   <h2>채점 결과</h2>
-  <div class="total"><span id="totalTxt">0</span><span> / 50점</span></div>
+  <div class="total"><span id="totalTxt-mock">0</span><span> / 50점</span></div>
   <div class="scroller">
     <table>
       <thead><tr><th>대문</th><th>분야</th><th class="n">득점</th><th class="n">정답 수</th></tr></thead>
-      <tbody id="breakdown"></tbody>
+      <tbody id="breakdown-mock"></tbody>
     </table>
   </div>
-  <p style="margin-top:1rem; font-size:.85rem; color:var(--ink2);" id="advice"></p>
+  <p style="margin-top:1rem; font-size:.85rem; color:var(--ink2);" id="advice-mock"></p>
+</div>
+</div>
+
+<!-- ══════════ 보충문제 ══════════ -->
+<div class="view" id="v-plus">
+<header class="top">
+  <div class="eyebrow">수업 형광펜 표시 기반 · 보충</div>
+  <h1>보충문제　— 모의시험이 빠뜨린 구멍</h1>
+  <div class="meta">
+    <span>출제범위 : 제16회~제25회</span>　·　<span>60문항 / 60점</span>　·　<span>1점×60</span><br>
+    근거자료 : 수업 중 형광펜 표시 슬라이드 (제16~25회)
+  </div>
+  <div class="caution">
+    「모의시험」 탭이 다루지 않는 <strong>무함마드·히즈라력, 이슬람법의 5법규칙, 인증기준의 상위(相違), 성지순례·타분 핫지, 방일 무슬림 관광객 추계, 일본의 인증단체 난립, GMTI OIC 가맹국판</strong>을 집중적으로 출제했습니다.<br>
+    전부 <strong>수업에서 형광펜으로 표시된 항목</strong>에서 뽑았으므로, 모의시험보다 이쪽이 적중률이 높을 가능성이 있습니다.
+  </div>
+</header>
+<div id="exam-plus"></div>
+<div class="result" id="result-plus">
+  <h2>채점 결과</h2>
+  <div class="total"><span id="totalTxt-plus">0</span><span> / 60점</span></div>
+  <div class="scroller">
+    <table>
+      <thead><tr><th>대문</th><th>분야</th><th class="n">득점</th><th class="n">정답 수</th></tr></thead>
+      <tbody id="breakdown-plus"></tbody>
+    </table>
+  </div>
+  <p style="margin-top:1rem; font-size:.85rem; color:var(--ink2);" id="advice-plus"></p>
+</div>
+</div>
+
+<!-- ══════════ 포인트 노트 ══════════ -->
+<div class="view" id="v-note">
+<header class="top">
+  <div class="eyebrow">최종 확인용 · 회차별 요약</div>
+  <h1>포인트 노트　제16회 ~ 제28회</h1>
+  <div class="meta">
+    수업에서 형광펜으로 표시된 항목 + 배포 레쥬메의 수치를 회차별로 압축했습니다.<br>
+    <span>■ 표시는 「혼동을 노리는 함정」</span>
+  </div>
+  <div class="toc">
+    <a href="#n16">16 무함마드</a><a href="#n17">17 이슬람법</a><a href="#n18">18 할랄산업</a><a href="#n19">19 식의 금기</a><a href="#n20">20 MS1500</a><a href="#n21">21 기준의 상위</a><a href="#n22">22 성지순례</a><a href="#n23">23 MS2610</a><a href="#n24">24 방일 관광객</a><a href="#n25">25 일본·GMTI</a><a href="#n26">26~28 이슬람 금융</a>
+  </div>
+</header>
+
+<div class="note" id="n16">
+  <div class="note-head"><span class="note-no">제16회</span><span class="note-title">개조 무함마드와 이슬람의 시간</span><span class="note-jp">開祖ムハンマド</span></div>
+  <h4>연표 (숫자 그대로 나온다)</h4>
+  <div class="scroller"><table>
+    <thead><tr><th>연도</th><th>사건</th></tr></thead>
+    <tbody>
+      <tr><td class="n"><b>610년경</b></td><td>히라 동굴에서 최초의 계시</td></tr>
+      <tr><td class="n"><b>622년</b></td><td><b>히즈라</b> — 무함마드·아부 바크르 등 <b>70명</b>이 메카에서 북방 <b>350km</b>의 야스리브(＝<b>메디나</b>)로 이주. 이 해가 <b>히즈라력 원년(AH 1년)</b></td></tr>
+      <tr><td class="n"><b>628년</b></td><td>메카 측과 <b>화평조약</b></td></tr>
+      <tr><td class="n"><b>630년</b></td><td>조약 위반을 구실로 <b>메카 정복</b></td></tr>
+      <tr><td class="n"><b>632년</b></td><td>메카 순례 중 사망. 성인이 된 아들이 없어 친족이 통치 → <b>정통 칼리프 시대</b> → 후계자 분쟁</td></tr>
+    </tbody>
+  </table></div>
+  <h4>히즈라력 (ヒジュラ暦, Anno Hegirae＝AH)</h4>
+  <ul>
+    <li><b>순수태음력</b>. 삭망월(신월→다음 신월, 29일과 몇 시간)이 기준</li>
+    <li>1년 ＝ 신월 12회(12개월) ＝ <b>354일</b></li>
+    <li>29일인 달과 30일인 달이 <b>교대</b>. <b>윤달을 두지 않는다</b> → 계절과 어긋난다</li>
+    <li>태양력(그레고리력)은 1년 365일 6시간 → <b>서력 32년간 ≒ 히즈라력 33년간</b></li>
+  </ul>
+  <div class="warn">■ <b>「윤달을 두지 않는다」</b>가 태음태양력과 가르는 결정적 차이. 「3년에 1개월분 어긋난다」는 그림도 함께 나왔다.</div>
+</div>
+
+<div class="note" id="n17">
+  <div class="note-head"><span class="note-no">제17회</span><span class="note-title">이슬람법 — 법원과 법규칙</span><span class="note-jp">イスラーム法</span></div>
+  <h4>4법원 (순서까지 외울 것)</h4>
+  <div class="scroller"><table>
+    <thead><tr><th>순위</th><th>법원</th><th>내용</th></tr></thead>
+    <tbody>
+      <tr><td class="n">제1</td><td><b>쿠란 (クルアーン)</b></td><td>신의 말씀. 「읽히는 것」「암송되는 것」. <b>114개의 장＝수라(スーラ)</b>, 각 장은 <b>절＝아야(アーヤ)</b>. 제1장을 제외하면 <b>긴 순서</b>로 배열(계시순 아님). 일본어판은 문고 3권분</td></tr>
+      <tr><td class="n">제2</td><td><b>순나 (スンナ)</b></td><td>「관습」「관행」. 무함마드의 <b>언행 그 자체</b>. ■ 그것을 모은 <b>전승집＝하디스(ハディース)</b>와 구별. 부하리 『사히흐』 등 <b>육전승집(Kutub al-Sittah)</b>이 유명</td></tr>
+      <tr><td class="n">제3</td><td><b>이즈마 (イジュマー)</b></td><td>법학자의 <b>합의</b></td></tr>
+      <tr><td class="n">제4</td><td><b>키야스 (キヤース)</b></td><td><b>유추</b>. 쿠란·순나의 유사 판단으로부터의 추론</td></tr>
+    </tbody>
+  </table></div>
+  <h4>규범의 대상에 따른 2대별</h4>
+  <ul>
+    <li><b>이바다트 (イバーダート, Ibadah)</b> ＝ 의례적 규범. 신에 대해 지는 의무. 오행(五行)</li>
+    <li><b>무아말라트 (ムアーマラート, Muamalat)</b> ＝ 법적 규범. 무슬림끼리의 권리·의무 관계 (결혼·이혼, 친자·상속, 노예, 계약, 매매, 소송·재판, 범죄·형벌)</li>
+  </ul>
+  <h4>5법규칙 (매년 나오는 표)</h4>
+  <div class="scroller"><table>
+    <thead><tr><th>구분</th><th>법규칙</th><th>뜻</th></tr></thead>
+    <tbody>
+      <tr><td rowspan="4"><b>할랄<br>(합법)</b></td><td><b>와지브 (ワージブ, Wajib)</b></td><td>의무</td></tr>
+      <tr><td><b>만두브 (マンドゥーフ)</b>／무스타하브</td><td>추천</td></tr>
+      <tr><td><b>무바흐 (ムバーフ)</b></td><td>허용</td></tr>
+      <tr><td><b>마크루흐 (マクルーフ)</b></td><td>기피</td></tr>
+      <tr><td><b>하람</b></td><td><b>하람 (ハラム, Haram)</b></td><td>금지 ＝ 행하면 벌받는 행위</td></tr>
+    </tbody>
+  </table></div>
+  <ul>
+    <li><b>할랄</b> ＝ 「적어도 <b>「행했다」는 이유로 벌받는 일이 없는</b> 행위·사물」 (＝위 4개의 총칭)</li>
+    <li><b>하람</b>은 <b>논할랄(non-halal)</b>이라고도 불린다. 할랄과 하람은 서로 대의어</li>
+    <li><b>슈브하 (シュブハ, Shubha)</b> ＝ 어디에 분류할지 판단재료가 없어 판단이 서지 않는 상태의 행위·사물</li>
+  </ul>
+</div>
+
+<div class="note" id="n18">
+  <div class="note-head"><span class="note-no">제18회</span><span class="note-title">할랄 산업 7분야</span><span class="note-jp">ハラール産業</span></div>
+  <h4>산업의 범위 (3층 구조)</h4>
+  <ul>
+    <li><b>협의</b> ＝ 의례에 쓰는 도구 : 예배용 융단, 키블라 컴퍼스, 부적</li>
+    <li><b>광의</b> ＝ 무슬림이 사용할 수 있는 모든 산업 : 자동차, 전자기기, 교육</li>
+    <li><b>불포함</b> ＝ 샤리아가 금하는 행위(도박·매춘·음주·점술) + 타종교 관련(묵주, 하마야)</li>
+  </ul>
+  <h4>시장규모 (2023년, 단위 10억 달러) — 전체 <b>7조 3,570억 달러</b></h4>
+  <div class="scroller"><table>
+    <thead><tr><th>분야</th><th class="n">시장규모</th><th>소비 상위</th><th>생산 상위</th></tr></thead>
+    <tbody>
+      <tr><td><b>이슬람 금융</b></td><td class="n"><b>4,925</b></td><td colspan="2">최대. 단 산업 내 점유율은 <b>3.0%</b>로 최소급 ■</td></tr>
+      <tr><td>할랄 식품</td><td class="n">1,434</td><td>①인도네시아 ②터키 ③파키스탄 ④이집트 ⑤방글라데시</td><td>—</td></tr>
+      <tr><td>패션</td><td class="n">—</td><td>터키, UAE, 나이지리아</td><td>중국, 인도, 터키 ■</td></tr>
+      <tr><td>의약품</td><td class="n">107 (약 1,070억$)</td><td>터키, 사우디아라비아, 미국</td><td><b>프랑스, 독일, 영국</b> ■</td></tr>
+      <tr><td>화장품</td><td class="n"><b>87 (최소)</b></td><td colspan="2">의약품의 <b>7할 정도</b></td></tr>
+    </tbody>
+  </table></div>
+  <div class="warn">■ 점유율(2022년)은 <b>할랄 식품 16.6% &gt; 이슬람 금융 3.0%</b>. 「시장규모 최대＝금융 / 점유율 최대＝식품」의 뒤틀림이 단골.<br>■ 「소비는 이슬람 국가 / 생산은 유럽·중국」의 비대칭도 단골.</div>
+  <h4>명칭의 대응</h4>
+  <ul>
+    <li><b>Shari'ah compliant ＝ 금융</b> / <b>Muslim-friendly ＝ 관광</b> ■ (뒤바꿔 출제)</li>
+    <li>Islamic ＝ 주로 무슬림이 사용 / Halal ＝ 무슬림·비무슬림 모두 사용</li>
+    <li><b>할랄 에코시스템</b> ＝ 상류에서 하류까지 할랄로 완결되는 경제</li>
+  </ul>
+  <h4>분야별 세부</h4>
+  <ul>
+    <li><b>미디어·오락</b> : ①예배 앱(GPS로 현재지·방위 확정 → DB 접속해 예배시간 표시) ②<b>식품이 할랄인지 조사하는 앱(바코드 촬영 → DB 검색)</b> ③리뷰 사이트도 <b>포함</b> ④EC 사이트 ⑤자카트 납부 사이트 ⑥연동 광고. 비판받은 예＝<b>포켓몬 GO</b>(「이용자 안전이 확보되지 않았다」). 주의점＝일부 이슬람 국가의 <b>인터넷 접속 제한</b></li>
+    <li><b>패션</b> : 쿠란 [24:31]. <b>아우라('awrah)</b>＝신체의 숨겨야 할 부분. 문제점 (1)아우라는 어디인가(몸·팔·다리·머리카락·귀·목덜미가 일반적 ⇔ 얼굴도 포함하는 견해) (2)어떤 옷으로 숨길까 → 지역차 7요인 : ①법학파 ②기후 ③서양문화와의 접촉 ④이슬람 이전의 문화 ⑤세대 ⑥TPO ⑦유행</li>
+    <li><b>화장품</b> : 향수는 휘발·방부를 위해 알코올 사용 → <b>①알코올을 인정하지 않는 인증단체 ⇔ ②음용이 아니므로 인정하는 인증단체</b>로 갈린다. 매니큐어는 <b>우두(정결례)</b> 때 발수성이 높으면 예배가 무효 → <b>침투성 높은 매니큐어</b> 개발. 구성비 : 스킨케어 27% &gt; 메이크업 20% ＝ 헤어케어 20% &gt; 향수 10%, 기타 23%</li>
+  </ul>
+</div>
+
+<div class="note" id="n19">
+  <div class="note-head"><span class="note-no">제19회</span><span class="note-title">이슬람에서의 식의 금기</span><span class="note-jp">食の禁忌</span></div>
+  <h4>쿠란 [2:168] 「사람들이여, 지상의 것 가운데 허용된 좋은 것을 먹으라」</h4>
+  <div class="scroller"><table>
+    <thead><tr><th>원문</th><th>용어</th><th>대의어</th></tr></thead>
+    <tbody>
+      <tr><td>허용된</td><td><b>할랄 (halal)</b></td><td><b>하람 (haram)</b> ／ 논할랄</td></tr>
+      <tr><td>좋은 것</td><td><b>토이입 (toyyib)</b></td><td><b>나주스 (najis／ナジス)</b> ＝ 불결한 것</td></tr>
+      <tr><td>허용된 좋은 것</td><td colspan="2"><b>할랄란 토이이반 (halalan toyyiban)</b></td></tr>
+    </tbody>
+  </table></div>
+  <div class="warn">■ <b>「무슬림이 먹어야 할 것은 할랄이면서 토이입인 것」</b>. 할랄↔하람 / 토이입↔나주스의 <b>짝을 어긋나게</b> 하는 문제가 나온다.</div>
+  <ul>
+    <li><b>나주스</b>의 예 : 개·돼지와 그 파생물, 사람·동물의 배설물, 썩은 고기, 하무르(취하게 하는 것)</li>
+    <li>정화 ＝ <b>세르투 세정(sertu／スルトゥ)</b> : 천연수로 <b>7회</b>, 그중 <b>1회는 흙을 섞은 물</b></li>
+  </ul>
+</div>
+
+<div class="note" id="n20">
+  <div class="note-head"><span class="note-no">제20회</span><span class="note-title">말레이시아의 할랄 인증 (MS1500)</span><span class="note-jp">MS1500の認証</span></div>
+  <ul>
+    <li>인증기관 <b>JAKIM</b>(총리부 이슬람개발국) × 기준 <b>MS1500:2019</b>(과학기술혁신부 기준국 책정, 제3차 개정판)</li>
+  </ul>
+  <h4>인증의 3단계</h4>
+  <ul>
+    <li><b>수순1 신청</b></li>
+    <li><b>수순2 심사</b> ＝ ①서류심사 ②현지조사 ③상품 샘플 조사. 현지조사는 <b>식품위생 심사관 + 이슬람 심사관 2명</b>이 시설(식품공장·레스토랑·도축장)을 방문해 회사 간부·종업원에게 청취. 필요에 따라 샘플을 가져가 <b>화학검사</b></li>
+    <li><b>수순3 인증</b> ＝ <b>유효기간 2년간</b>. 상품에 <b>할랄 로고 첨부 가능</b></li>
+  </ul>
+  <h4>심사·인증의 대상 외 (형광펜)</h4>
+  <ul>
+    <li><b>인증 취득이 불요</b> : 가공되지 않은 천연산품 — 생선, 야채, 과일 등 <span style="color:var(--ink3)">(※할랄임이 명백. 다만 회(刺身) 등 가공품은 인증 대상)</span></li>
+    <li><b>사람의 음식이 아닌 것</b> : 비료, 사료, 펫푸드</li>
+    <li><b>MS1500 이외의 인증 대상</b> : 보건성이 <b>의약품</b>으로 인정한 제품</li>
+    <li><b>이슬람에서 금지된 행위와 관련</b> : 헤어컬러, 헤어다이</li>
+    <li><b>명칭의 부적절성</b> : 「할랄 비어」 등</li>
+  </ul>
+  <h4>재심사 / 위조</h4>
+  <ul>
+    <li>유효기간 2년이 지나면 다시 심사</li>
+    <li><b>유효기간 내라도</b> 신청 시점과 상황이 바뀌면 재심사 — 예) 원재료 매입처 변경, 제조라인 변경, 이전</li>
+    <li>인증 미취득인데 증명서를 게시하거나 로고를 첨부 → <b>거래표시법 위반으로 형사벌</b></li>
+  </ul>
+  <h4>MS1500:2019 요건</h4>
+  <ul>
+    <li>4-2 시설과 설비 : 원재료→완제품의 흐름에서 <b>교차오염(交差汚染)</b>을 방지</li>
+    <li>포장·라벨 : 논할랄 제품에서 딴 <b>상품명</b> 금지 (햄, 바쿠테＝肉骨茶, 베이컨, 비어, 럼)</li>
+  </ul>
+</div>
+
+<div class="note" id="n21">
+  <div class="note-head"><span class="note-no">제21회</span><span class="note-title">인증기준의 상위 (相違)</span><span class="note-jp">異なるハラール認証基準</span></div>
+  <ul>
+    <li>기준이 갈리는 원인은 둘 : <b>①이슬람의 차이</b>(법학파의 상위 — 순니파·시아파 등) <b>②로컬 문화의 차이</b>(이슬람 이전부터의 전통문화와 그 허용 정도)</li>
+  </ul>
+  <div class="scroller"><table>
+    <thead><tr><th>구분</th><th>사례</th><th>국가별 대응</th></tr></thead>
+    <tbody>
+      <tr><td rowspan="2"><b>이슬람의<br>차이</b></td><td>①레스토랑의 남녀 분리</td><td><b>사우디아라비아</b> : 남성석·여성석·가족석. 남성석에서 여성석이 보이지 않게 칸막이 → <b>2019년 12월로 폐지</b><br><b>말레이시아</b> : 분리는 필수 아님. 단 중동 관광객용 칸막이를 둔 고급 아랍요리점 있음</td></tr>
+      <tr><td>②신체장애자 보조견</td><td><b>말레이시아</b> : 「펫을 시설 내에 데려와서는 안 된다」<br><b>싱가포르</b> : 「보조견이라면 점내 반입 가능, 전용 식기라면 점내 음식도 가능」<br>※보조견 국제기관에 가맹한 이슬람 국가는 <b>없다</b></td></tr>
+      <tr><td rowspan="2"><b>로컬 문화의<br>차이</b></td><td>①타파이 (tapai)</td><td>쌀·타피오카를 발효시킨 저알코올 전통주. 동남아 인증기관 : 「<b>취하게 하는 작용이 없으므로 할랄</b>」<br>쟁점 ＝ 알코올 성분을 몇 %까지 인정할 것인가</td></tr>
+      <tr><td>②코피 루왁 (kopi luwak)</td><td>사향고양이(자바어 <i>luwak</i>)의 똥에서 채취한 커피. 동물의 분뇨는 원래 <b>나주스</b><br><b>말레이시아</b> : ①콩 상태가 잘 보존되어 <b>심으면 싹틀 것</b> ②분변에서 채취 후 <b>즉시 세정될 것</b> → 2조건이면 할랄</td></tr>
+    </tbody>
+  </table></div>
+  <ul>
+    <li>보조견의 종류 : 맹도견·청도견·개조견 ⇔ 군용견·경찰견·마약탐지견. 일본은 <b>신체장애자보조견법(2003년)</b>으로 공공시설의 동반 수용 의무화</li>
+    <li>코피 루왁은 말레이시아·인도네시아에서 각국으로 수출. 일본에서 콩 100g당 5,000엔 이상</li>
+  </ul>
+  <h4>기업 사례 3종</h4>
+  <ul>
+    <li><b>무인양품(양품계획)</b> : Brahim's에 <b>제조위탁</b> → 완제품을 <b>역수입</b>해 자사 브랜드·매장에서 판매. 인증은 JAKIM</li>
+    <li><b>큐피</b> : 패키지 캐릭터가 「천사이며 우상숭배」라고 JAKIM 조사관에게 지적 → <b>일러스트에서 날개 삭제</b></li>
+    <li><b>골든 튠</b>(호주 버터) : <b>돼지 DNA 검출</b> / <b>아지노모토</b>(인도네시아) : 돼지 유래 효소</li>
+  </ul>
+</div>
+
+<div class="note" id="n22">
+  <div class="note-head"><span class="note-no">제22회</span><span class="note-title">성지순례와 이슬람 관광시장</span><span class="note-jp">聖地巡礼</span></div>
+  <h4>순례 / 여행 / 이동의 구별</h4>
+  <ul>
+    <li><b>순례</b> ＝ 행선지·목적이 이슬람에서 의의를 부여받은 <b>종교 투어리즘</b> — <b>핫지 · 우므라 · 지야라</b>의 3가지</li>
+    <li><b>여행</b> ＝ 종교적 의의는 없으나 위반도 아닌 투어리즘 (관광, 여가활동, 스포츠 관전)</li>
+    <li>⇔ <b>거주·취로를 목적으로 하는 이동</b>(이민·돈벌이)은 <b>관광이 아니다</b></li>
+  </ul>
+  <div class="scroller"><table>
+    <thead><tr><th>순례</th><th>내용</th></tr></thead>
+    <tbody>
+      <tr><td><b>핫지 (ハッジ)</b></td><td>대순례. 정해진 시기의 메카 순례. 오행의 하나(의무)</td></tr>
+      <tr><td><b>우므라 (ウムラ)</b></td><td>핫지 이외의 시기에 행하는 간략한 순례. <b>추천(권장)</b></td></tr>
+      <tr><td><b>지야라 (ズィヤーラ)</b></td><td>아라비아어 「방문」 → <b>성자묘 참배</b>. 대상 ＝ 무함마드의 친족, 역대 칼리프, 이맘, 저명 법학자, 성자(왈리), 신비주의자(수피). 각지에 점재. 소원 빌기·관광</td></tr>
+    </tbody>
+  </table></div>
+  <h4>타분 핫지 (Lembaga Tabung Haji) — 말레이시아</h4>
+  <ul>
+    <li>핫지 관련 업무를 총괄하는 <b>정부계 공사</b></li>
+    <li>흐름 : 개인 계좌 개설(본인·연금기금 경유 등) → <b>정기적립</b> → 핫지 신청 → 계좌에서 비용 충당</li>
+    <li>패키지 : 왕복 도항비(전세기), 비자 대행, 호텔비, 가이드비, 각종 서비스비</li>
+    <li>현지 서비스 : 오피스 보유, <b>병원·구급차</b> 운영</li>
+    <li><b>자산운용(재정투융자)</b> : 이슬람식 운용, 호텔 경영</li>
+  </ul>
+  <h4>순례 할당 건수 (2025년)</h4>
+  <ul>
+    <li>인도네시아 <b>22만 1,000건</b> ＞ 말레이시아 <b>3만 1,600건</b> ＞ 태국 <b>1만 3,000건</b> ＞ 싱가포르 <b>900건</b></li>
+  </ul>
+  <h4>이슬람 관광시장 (억 미달러)</h4>
+  <ul>
+    <li>2019년 1,980 → 2020년 데이터 없음(리포트 미발행) → 2021년 1,020 → 2022년 1,330 → <b>2023년 2,169 (사상 첫 2,000억 달러 초과)</b></li>
+    <li>2019년 시점 세계 관광시장의 <b>11% 정도</b>. 미국시장과 동등한 규모</li>
+    <li><b>관광객 지출</b> : ①사우디아라비아 243억 ②UAE 172억 ③카타르 142억 ④쿠웨이트 130억 ⑤인도네시아 112억</li>
+    <li><b>인바운드</b> : ①터키 640만명 ②UAE 620만 ③러시아 560만 ④말레이시아 530만 ⑤프랑스 500만</li>
+  </ul>
+  <div class="warn">■ <b>지출 1위＝사우디 / 인바운드 1위＝터키</b>. 「1위」를 뒤바꾸는 문제 주의.</div>
+</div>
+
+<div class="note" id="n23">
+  <div class="note-head"><span class="note-no">제23회</span><span class="note-title">관광의 인증기준 MS2610</span><span class="note-jp">MS2610:2015</span></div>
+  <h4>JAKIM</h4>
+  <ul>
+    <li>연방정부 총리부 이슬람개발국 (<i>Jabatan Kemajuan Islam Malaysia</i>)</li>
+    <li>말레이시아에서 <b>이슬람 행정의 담당 부서</b>. <b>1974년</b>부터 인증기관으로서 업무 개시</li>
+    <li><b>금융 이외</b>의 분야·기준에 근거한 인증을 하는 단체 ■</li>
+  </ul>
+  <h4>MS 기준 일람 (번호 ↔ 대상)</h4>
+  <div class="scroller"><table>
+    <thead><tr><th>번호</th><th>영문명</th><th>대상</th></tr></thead>
+    <tbody>
+      <tr><td><b>MS1500:2019</b></td><td>Halal Food</td><td><b>식품</b></td></tr>
+      <tr><td>MS2300:2009</td><td>Value-Based Management System</td><td>경영</td></tr>
+      <tr><td>MS2393:2013</td><td>Islamic and Halal Principles</td><td>용어의 정의</td></tr>
+      <tr><td>MS2424:2019</td><td>Halal Pharmaceuticals</td><td><b>의약품</b></td></tr>
+      <tr><td>MS2565:2014</td><td>Halal Packaging</td><td>패키지</td></tr>
+      <tr><td>MS2594:2015</td><td>Halal Chemicals</td><td>음료수</td></tr>
+      <tr><td><b>MS2610:2015</b></td><td>Muslim Friendly Hospitality Services – Requirements</td><td><b>관광</b> : 숙박시설·투어 패키지·투어 가이드</td></tr>
+      <tr><td>MS2627:2017</td><td>Detection of Porcine DNA</td><td>돼지 유전자 검출법</td></tr>
+    </tbody>
+  </table></div>
+  <h4>5. 특정 요건 — 5.2 숙박시설</h4>
+  <ul>
+    <li><b>5.2.2.2 라마단</b> : 라마단 기간 중 서비스 정보를 얻고 커뮤니케이션을 취할 수 있어야 한다. 서비스에는 <b>사후르(일출 전)</b>와 <b>이프타르(일몰 후)</b>의 시간과 식사를 포함</li>
+    <li><b>5.2.3.1</b> 시설에는 무슬림용 <b>공중 무살라(public Musalla)</b>가 설치되어 있어야 한다</li>
+    <li><b>5.2.3.2</b> 무살라의 요건 : <b>a)</b> 적절한 장소에 할당 + <b>간판</b>이 있을 것　<b>b)</b> 적절한 환기와 충분한 조명, 청결 유지, 적절한 유지보수　<b>c)</b> <b>권위 있는 당국의 확증을 얻은 키블라</b>가 명확히 표시</li>
+  </ul>
+  <div class="warn">■ <b>무살라(ムサッラ)</b>＝예배 공간 / <b>키블라(キブラ)</b>＝메카의 방향 / <b>사자다(サジャーダ)</b>＝예배용 융단. 3개 구별은 빈출.</div>
+</div>
+
+<div class="note" id="n24">
+  <div class="note-head"><span class="note-no">제24회</span><span class="note-title">방일 외국인 무슬림 관광객</span><span class="note-jp">訪日外国人ムスリム観光客</span></div>
+  <h4>비지트 재팬 사업 (ビジット・ジャパン事業)</h4>
+  <ul>
+    <li>목적 ＝ <b>방일 외국인 여행자의 증가</b>를 목적으로 한 방일 프로모션 사업</li>
+    <li><b>2003년</b> 국토교통성 중심으로 스타트 → <b>2008년 관광청 설치</b></li>
+    <li>중점시장(2026년 현재) <b>23개국·지역</b> — 동아시아 : 한국·대만·중국·홍콩 ／ <b>동남·남아시아·중동 : 태국·싱가포르·말레이시아·인도네시아·필리핀·베트남·인도·중동지역(GCC 6개국, 터키, 이스라엘)</b> ／ 구미호 : 영국·프랑스·독일·러시아·이탈리아·스페인·북유럽·미국·캐나다·멕시코·호주</li>
+  </ul>
+  <h4>무슬림 관광객 수의 추계</h4>
+  <ul>
+    <li><b>정식 통계가 없다</b> — 외국인용 출입국 카드에 <b>종교 기재란이 없기</b> 때문</li>
+    <li>추계식 ＝ <b>Σ (국가별 관광객 수 × 국가별 무슬림 인구비)</b></li>
+  </ul>
+  <div class="scroller"><table>
+    <thead><tr><th>연</th><th class="n">2019</th><th class="n">2020</th><th class="n">2021</th><th class="n">2022</th><th class="n">2023</th><th class="n">2024</th><th class="n">2025</th></tr></thead>
+    <tbody>
+      <tr><td>전 관광객(만명)</td><td class="n">3,188.2</td><td class="n">411.6</td><td class="n">24.6</td><td class="n">383.2</td><td class="n">2,506.6</td><td class="n">3,687.0</td><td class="n">4,268.4</td></tr>
+      <tr><td>무슬림(만명)</td><td class="n">126.2</td><td class="n">22.3</td><td class="n">2.4</td><td class="n">29.9</td><td class="n">123.8</td><td class="n">165.4</td><td class="n"><b>206.1</b></td></tr>
+      <tr><td>비율</td><td class="n">3.96%</td><td class="n">5.42%</td><td class="n"><b>9.68%</b></td><td class="n">7.78%</td><td class="n">4.94%</td><td class="n">4.49%</td><td class="n">4.83%</td></tr>
+    </tbody>
+  </table></div>
+  <ul>
+    <li>경향 : <b>2003~20년은 대체로 3~5% 범위</b>로 추이 → <b>2021~22년</b>은 중국 관광객이 대폭 줄어 <b>상대적으로</b> 비율이 상승 → <b>2023~25년</b>은 연간 100만명에서 <b>200만명 초과</b>로</li>
+    <li>1일당 체재 무슬림(인/일×10일) : 2025년 <b>56,459명</b></li>
+  </ul>
+</div>
+
+<div class="note" id="n25">
+  <div class="note-head"><span class="note-no">제25회</span><span class="note-title">일본 기업·인증단체와 GMTI 2025</span><span class="note-jp">ハラール食品と日本企業</span></div>
+  <h4>일본 식품 메이커의 구조적 문제</h4>
+  <ul>
+    <li>다른 산업보다 <b>국내시장에 강하게 의존</b>하는 내수계 / 단기의 경기동향에 <b>좌우되기 어렵다</b> / 장기의 시장구조 변화에는 <b>대응하기 어렵다</b> / 해외진출·판매가 장기 과제</li>
+    <li><b>해외매출고비율</b> ＝ (국내 본사의 해외수출 매출 ＋ 해외자회사의 현지 매출) ÷ 전 매출고</li>
+    <li>도쿄증권 상장기업 <b>식품업(151사)</b>의 해외매출고비율은 <b>27/33위(2009년)</b> ＝ 낮다</li>
+    <li>고비율 기업 : <b>킷코만 58.6% ＞ 아지노모토 54.6% ＞ 미쓰칸 53.0%</b></li>
+  </ul>
+  <h4>제조와 인증 취득 — 대기업 vs 중소기업</h4>
+  <div class="scroller"><table>
+    <thead><tr><th></th><th>대기업</th><th>중소기업</th></tr></thead>
+    <tbody>
+      <tr><td>제조</td><td><b>현지에 공장 설립</b></td><td><b>국내에서 제조</b></td></tr>
+      <tr><td>원재료</td><td>현지에서 조달</td><td>국내에서 조달</td></tr>
+      <tr><td>인증</td><td><b>현지</b> 인증기관</td><td><b>국내</b> 인증기관</td></tr>
+      <tr><td>판매</td><td>현지 판매 → 타 이슬람 국가 수출 → <b>일본에도 역수입</b></td><td>수출 또는 <b>국내 할랄 레스토랑</b>에 판매</td></tr>
+      <tr><td>예</td><td>아지노모토, 오츠카제약, 일본식연, 양품계획(무인양품)</td><td>지방 중소기업 ＋ 지방자치체 ＋ 국내 인증단체</td></tr>
+    </tbody>
+  </table></div>
+  <ul>
+    <li>조합의 선택 기준 : <b>입지</b>(공장건설·고용 비용, 원재료 조달, 시장과의 근접성) / <b>인증</b>(인증단체의 소비자 신뢰성, 취득 용이성) → 기업마다 최적해가 다르다</li>
+  </ul>
+  <h4>일본의 할랄 인증단체 — 「난립」</h4>
+  <ul>
+    <li>재일 무슬림의 <b>전국연합조직이 존재하지 않는다</b> / 무슬림·비무슬림 모두가 인정하는 이슬람의 <b>권위가 국내에 부재</b></li>
+    <li><b>헌법 제20조 정교분리</b> → 정부·자치체는 할랄 인증을 실시하지 않는다 → <b>민간 인증단체 난립</b></li>
+    <li>수 : <b>약 80~90개</b>. 형태 ＝ ①비영리 NPO·NGO ②종교법인 ③(컨설팅) 회사. 활동범위는 시정촌 단위~전국</li>
+    <li><b>JAKIM 인정 일본의 할랄 인증단체 ＝ 2025년 현재 6단체</b> — 2017년 이전 : ①일본무슬림협회 ②일본할랄협회 ／ 2017년 인정 : ③일본이슬람문화센터 ④무슬림 프로페셔널 재팬 협회 ⑤일본아시아할랄협회 (＋일본할랄유닛협회는 후에 실효) ／ 2019년 인정 : ⑥재팬 할랄 파운데이션</li>
+  </ul>
+  <h4>일본의 할랄 레스토랑</h4>
+  <ul>
+    <li>게재 점포 수(2026년 6월 1일 현재) : <b>타베로그 912 / 할랄구르메재팬 823</b></li>
+    <li>분포는 <b>남관동권 · 도카이권 · 간사이권</b>의 3지역에 치우침 — 도쿄 387, 아이치 71, 사이타마 59, 오사카 53, 가나가와 52, 효고 47, 지바 42, 교토 37</li>
+    <li>체인점의 할랄 인증 취득 : 맥도날드·KFC·피자헛은 <b>MY○ SG○ ID○ JP×</b> / 스타벅스 MY○ SG× ID○ JP× / <b>코코이찌방야(일)</b> MY△ SG× ID△ <b>JP△</b> / <b>마루가메제면(일)</b> MY○ SG× ID○ JP×</li>
+  </ul>
+  <h4>GMTI 2025 (Global Muslim Travel Index)</h4>
+  <div class="scroller"><table>
+    <thead><tr><th>OIC 가맹국</th><th class="n">점수</th><th>OIC 비가맹국</th><th class="n">점수</th></tr></thead>
+    <tbody>
+      <tr><td>1 <b>말레이시아</b></td><td class="n"><b>79</b></td><td>1 <b>싱가포르</b></td><td class="n"><b>71</b></td></tr>
+      <tr><td>2 터키 / 사우디아라비아 / UAE</td><td class="n">78</td><td>2 영국</td><td class="n">63</td></tr>
+      <tr><td>5 인도네시아 / 카타르</td><td class="n">76</td><td>3 홍콩</td><td class="n">62</td></tr>
+      <tr><td>7 오만 / 쿠웨이트</td><td class="n">74</td><td>4 대만</td><td class="n">58</td></tr>
+      <tr><td>9 요르단 / 이란</td><td class="n">73</td><td>5 태국</td><td class="n">57</td></tr>
+      <tr><td>11 이집트 / 모로코 / 바레인</td><td class="n">70</td><td>8 필리핀</td><td class="n">53</td></tr>
+      <tr><td>14 몰디브 / 브루나이</td><td class="n">69</td><td><b>14 일본</b></td><td class="n"><b>51</b></td></tr>
+      <tr><td>16 우즈베키스탄</td><td class="n">67</td><td>15 한국</td><td class="n">50</td></tr>
+    </tbody>
+  </table></div>
+  <ul>
+    <li>배점 : <b>서비스(SERVICES) 40%</b> — 예배소 10%, 할랄 식사 10%, 공항 10%, 숙박 5%, 유산과 경험 5%. 그 밖에 입국자 수 2.5%, 기본 유틸리티 2.5% 등</li>
+    <li>일본의 소항목 : <b>교통 인프라 98점(공동 1위, 평균 65.22)</b> / 치안 84점(공동 10위) / <b>마케팅 58점(11위)</b> / 비자 63점 / 접속성 18점 / <b>커뮤니케이션 8점(123위)</b> / <b>관계자의 인식 8점(98위)</b> / <b>예배소 10점(공동 133위·최하위, 21개국)</b></li>
+  </ul>
+  <div class="warn">■ 「이슬람과 직접 관계없는 항목(교통·치안)은 고득점 / 현장 대응력(커뮤니케이션·관계자 인식)과 예배소는 최저」라는 대비가 결론. <b>마케팅은 11위로 높다</b>는 점이 커뮤니케이션과 뒤바뀌어 출제된다.</div>
+</div>
+
+<div class="note" id="n26">
+  <div class="note-head"><span class="note-no">제26~28회</span><span class="note-title">이슬람 금융 — 말레이시아 vs 인도네시아</span><span class="note-jp">イスラーム金融</span></div>
+  <div class="scroller"><table>
+    <thead><tr><th>항목</th><th>말레이시아</th><th>인도네시아</th></tr></thead>
+    <tbody>
+      <tr><td>근거법</td><td>1983년 최초 은행 → 1989년 이슬람 은행법 → 현행 <b>2013년 이슬람 금융서비스법</b></td><td>1992년 은행법 개정(설립 가능) → 1998년 개정(겸업 가능) → <b>2008년 6월 샤리아 은행법 신설</b></td></tr>
+      <tr><td>기존형 은행 대비 총자산</td><td><b>약 5할 (50% 전후)</b></td><td><b>9.59%</b> (955조 루피아 ≒ 8조 5,100억 엔)</td></tr>
+      <tr><td>계약형태별 융자잔액</td><td><b>타와룩 64.81%</b> ＞ 이자라 14.99% ＞ 무샤라카 8.92% ＞ 무라바하 8.21%</td><td><b>무샤라카 약 50% ＋ 무라바하 약 41%</b> (손익공유형 중심)</td></tr>
+      <tr><td>융자처</td><td><b>가계부문 69.72%</b>(2025.12). 자가용·주택·개인 사용이 57.88%</td><td>가계는 거의 절반. 그중 주택 소유 29.08%</td></tr>
+      <tr><td>샤리아 보드</td><td><b>2층</b> — 중앙은행 Shariah Advisory Council(재무장관 조언으로 국왕이 임명) ＋ 각 은행 Shariah Supervisory Council</td><td><b>3층</b> — 국가샤리아협의회(이슬람 단체) ＋ 샤리아은행위원회(중앙은행) ＋ 샤리아감시위원회(각 시중은행)</td></tr>
+    </tbody>
+  </table></div>
+  <div class="warn">■ 「약 5할 대 약 1할」의 <b>자릿수 차이</b>, 「타와룩 중심 대 손익공유형 중심」, 「2층 대 3층」 — 이 3세트가 핵심.</div>
+</div>
 </div>
 
 <footer>
-  이 모의시험은 배포 레쥬메만을 근거로 만든 예상문제이며, 실제 출제를 보장하지 않습니다.<br>
+  이 페이지는 배포 레쥬메와 수업 중 형광펜 표시만을 근거로 만든 예상문제·요약이며, 실제 출제를 보장하지 않습니다.<br>
   실제 시험에서는 교과서 2권만 반입 가능 (레쥬메·노트 반입 불가). 시험기간은 7월 25일~31일.
 </footer>
 </div>
@@ -220,8 +637,10 @@
 <script>
 const C = ["①","②","③","④","⑤","⑥","⑦","⑧","⑨","⑩","⑪","⑫","⑬","⑭","⑮","⑯","⑰","⑱","⑲","⑳"];
 const KO = "ㄱㄴㄷ";
+const TRI = ["ㄱ·ㄴ","ㄱ·ㄷ","ㄴ·ㄷ","ㄱ·ㄴ·ㄷ (전부 옳음)","없음 (전부 틀림)"];
 
-const DATA = [
+/* ══════════ 모의시험 ══════════ */
+const DATA_MOCK = [
 {
   num:"I", title:"이슬람의 사고방식", jp:"イスラームの考え方", pts:"2점×5문＝10점", per:2, type:"cloze",
   instr:"다음 글의 (1)~(5)에 들어갈 말을 ①~⑩ 중에서 각각 하나씩 고르시오. 선택지는 (1)~(5) 공통이다.",
@@ -232,8 +651,8 @@ const DATA = [
   ],
   qs:[
     {n:"(1)", a:0, why:"제1의 법원은 <b>쿠란(クルアーン)</b>. ⑩샤리아는 법원이 아니라 법원을 근거로 편찬된 '이슬람법' 그 자체를 가리키므로 혼동 주의.", src:"2026-SEA216C p13~14"},
-    {n:"(2)", a:5, why:"쿠란은 114개의 장＝<b>수라(スーラ)</b>로 이루어지고, 각 장은 다시 절＝아야(⑦アーヤ)로 구성된다. '장'을 묻고 있으므로 ⑦이 아니라 ⑥.", src:"2026-SEA216C p14"},
-    {n:"(3)", a:1, why:"제2의 법원은 <b>순나(スンナ)</b>＝무함마드의 언행 그 자체. ③하디스는 그 순나를 정리해 엮은 '전승집'을 가리키는 별개의 말. 지문의 '그 내용은 …전승집으로 정리되었다'가 구분 단서.", src:"2026-SEA216C p15~16"},
+    {n:"(2)", a:5, why:"쿠란은 114개의 장＝<b>수라(スーラ)</b>로 이루어지고, 각 장은 다시 절＝아야(⑦アーヤ)로 구성된다. '장'을 묻고 있으므로 ⑦이 아니라 ⑥. 제1장을 제외하면 긴 순서로 배열되며 계시순이 아니다.", src:"2026-SEA216C p14"},
+    {n:"(3)", a:1, why:"제2의 법원은 <b>순나(スンナ)</b>＝무함마드의 언행 그 자체. ③하디스는 그 순나를 정리해 엮은 '전승집'을 가리키는 별개의 말(부하리 『사히흐』 등 육전승집). 지문의 '그 내용은 …전승집으로 정리되었다'가 구분 단서.", src:"2026-SEA216C p15~16"},
     {n:"(4)", a:3, why:"제3의 법원은 <b>이즈마(イジュマー, 합의)</b>. 제4는 키야스(⑤キヤース, 유추)이므로 순서와 세트로 외울 것.", src:"2026-SEA216C p13, p17"},
     {n:"(5)", a:7, why:"의례적 규범＝<b>이바다트(イバーダート)</b>, 인간끼리의 관계를 규정하는 법적 규범＝무아말라트(⑨ムアーマラート). 이 짝은 매년 나오는 단골.", src:"2026-SEA216C p12, p18"}
   ]
@@ -241,7 +660,7 @@ const DATA = [
 {
   num:"II", title:"이슬람과 사회경제", jp:"イスラームと社会経済", pts:"1점×10문＝10점", per:1, type:"triple",
   instr:"(6)~(15)의 할랄 산업 관련 용어·개념을 설명하는 ㄱ·ㄴ·ㄷ 중 옳은 것만을 고른 조합을 ①~⑤ 중에서 각각 하나씩 고르시오. 선택지는 (6)~(15) 공통이다.",
-  legend:["ㄱ·ㄴ","ㄱ·ㄷ","ㄴ·ㄷ","ㄱ·ㄴ·ㄷ (전부 옳음)","없음 (전부 틀림)"],
+  legend:TRI,
   qs:[
     {n:"(6)", t:"할랄 산업의 정의", s:[
       "예배용 융단이나 키블라 컴퍼스의 제조업은 협의의 할랄 산업에 포함된다.",
@@ -277,7 +696,7 @@ const DATA = [
       "GPS 기능으로 현재지와 방위를 확정해 예배 시간과 방향을 표시하는 앱이 있다.",
       "할랄 레스토랑이나 호텔의 리뷰 사이트는 이 분야의 대상에 포함되지 않는다.",
       "일부 이슬람 국가에서는 인터넷 접속이 제한되어 개발과 배포에 지장을 주고 있다."],
-      a:1, why:"ㄴ이 틀렸다. <b>리뷰 사이트도 대상에 포함</b>된다(그 밖에 쿠란·하디스 검색, EC 사이트, 자카트 납부 사이트, 연동 광고). 비판받은 예로 포켓몬 GO가 나온다.", src:"2026-SEA218C p28~30"},
+      a:1, why:"ㄴ이 틀렸다. <b>리뷰 사이트도 대상에 포함</b>된다(그 밖에 쿠란·하디스 검색, 바코드를 촬영해 할랄 여부를 조사하는 앱, EC 사이트, 자카트 납부 사이트, 연동 광고). 비판받은 예로 포켓몬 GO가 나온다.", src:"2026-SEA218C p28~30"},
     {n:"(13)", t:"패션", s:[
       "복장에 지역차가 생기는 원인으로 법학파의 차이, 기후의 차이, 서양문화와의 접촉 빈도 등을 지적할 수 있다.",
       "베일 착용률은 정부의 의무화 여부 등에 따라 국가·지역마다 다르다.",
@@ -292,7 +711,7 @@ const DATA = [
       "예배 전의 정결례(우두)를 위해 침투성이 높은 매니큐어가 개발되어 있다.",
       "매출 구성비가 가장 높은 것은 스킨케어 상품이다.",
       "시장규모는 의약품을 웃돈다."],
-      a:0, why:"ㄷ이 틀렸다. 화장품 시장규모는 <b>의약품의 7할 정도</b>(87 대 107). 구성비는 스킨케어 27% > 메이크업 20% ＝ 헤어케어 20% > 향수 10%. 발수성이 높은 매니큐어는 우두를 방해해 예배가 무효가 되므로 침투성이 높은 제품이 개발되었다.", src:"2026-SEA218C p35"}
+      a:0, why:"ㄷ이 틀렸다. 화장품 시장규모는 <b>의약품의 7할 정도</b>(87 대 107). 구성비는 스킨케어 27% > 메이크업 20% ＝ 헤어케어 20% > 향수 10%, 기타 23%. 발수성이 높은 매니큐어는 우두를 방해해 예배가 무효가 되므로 침투성이 높은 제품이 개발되었다. 향수의 알코올은 <b>인정하지 않는 단체와 음용이 아니므로 인정하는 단체로 갈린다</b>.", src:"2026-SEA218C p35"}
   ]
 },
 {
@@ -306,7 +725,7 @@ const DATA = [
     "일본 기업의 대응도 제각각이다. 무인양품은 말레이시아 제조사인 Brahim's에 【24】을 하고, 완제품을 역수입해 일본의 자사 브랜드·매장에서 판매했다. 한편 【25】는 패키지에 그려진 캐릭터가 '천사이며 우상숭배에 해당한다'고 JAKIM 조사관에게 지적받아, 일러스트에서 날개를 삭제해 문제를 피했다."
   ],
   qs:[
-    {n:"(16)", a:0, why:"말레이시아의 인증기관은 <b>JAKIM</b>(총리부 이슬람개발국). ②BPJPH와 ③LPPOM-MUI는 인도네시아, ④MUIS는 싱가포르. 국가와 단체명의 대응은 필출.", src:"2026-SEA220C p9, 2026-SEA221C p6~8"},
+    {n:"(16)", a:0, why:"말레이시아의 인증기관은 <b>JAKIM</b>(총리부 이슬람개발국). ②BPJPH와 ③LPPOM-MUI는 인도네시아, ④MUIS는 싱가포르. 국가와 단체명의 대응은 필출. JAKIM은 <b>금융 이외</b>의 분야를 담당한다는 점도 확인.", src:"2026-SEA220C p9, 2026-SEA221C p6~8"},
     {n:"(17)", a:4, why:"식품 기준은 <b>MS1500:2019</b>(제3차 개정판). ⑥MS2610:2015는 관광(호텔·투어·가이드), ⑦MS2424:2019는 의약품. 번호와 대상의 조합으로 노려진다.", src:"2026-SEA220C p8~9"},
     {n:"(18)", a:7, why:"유효기간은 <b>2년간</b>. 큐피 사례에서도 '유효기간(2년간) 전에 재인증 절차 개시'로 나온다.", src:"2026-SEA220C p17, 2026-SEA221C p31"},
     {n:"(19)", a:11, why:"불결한 것＝<b>나주스(najs / ナジュス)</b>. 대비되는 ⑬토이입(toyyib)은 '좋은·건강에 이로운'이라는 뜻으로, 할랄과 세트로 '할랄란 토이이반'이라 쓴다. 나주스와 토이입을 뒤바꾸는 문제가 단골.", src:"2026-SEA219C p18~19, 2026-SEA220C p22~23"},
@@ -332,12 +751,12 @@ const DATA = [
     {n:"(27)", a:0, why:"예배를 위해 제공되는 장소·공간·방이 <b>무살라(ムサッラ)</b>. ②키블라는 메카의 방향, ③사자다는 예배용 융단(매트). 이 세 단어의 구별은 빈출.", src:"2026-SEA223C p19, 2026-SEA224C p48"},
     {n:"(28)", a:4, why:"Good to Have는 ①<b>라마단월 서비스</b> ②현지 무슬림과의 교류(⑥) 2항목. 사후르＝새벽 전 식사, 이프타르＝일몰 후 식사이므로 이 단어가 나오면 라마단 관련으로 판단.", src:"2026-SEA224C p50~51"},
     {n:"(29)", a:6, why:"'방문해도 상관없다'고 생각하는 무슬림도 <b>약 3할(30%)</b> 있다고 명기되어 있다. ⑧약 5할은 Nice to Have의 해당 비율(2분의 1)과의 함정.", src:"2026-SEA224C p47, p52"},
-    {n:"(30)", a:8, why:"GMTI <b>2025년판</b>에서 일본은 OIC 비가맹국 중 <b>14위</b>(51점). ※2021년판에 근거한 작년 기출에서는 다른 순위였으므로 반드시 2025년판으로 다시 외울 것. 1위 싱가포르(71), 2위 영국(63), 3위 홍콩(62), 15위 한국(50).", src:"2026-SEA225B p42"},
+    {n:"(30)", a:8, why:"GMTI <b>2025년판</b>에서 일본은 OIC 비가맹국 중 <b>14위</b>(51점). ※2021년판에 근거한 작년 기출에서는 다른 순위였으므로 반드시 2025년판으로 다시 외울 것. 1위 싱가포르(71), 2위 영국(63), 3위 홍콩(62), 15위 한국(50). OIC 가맹국판 1위는 말레이시아(79).", src:"2026-SEA225B p42"},
     {n:"(31)", a:10, why:"국내 이동의 편의성＝<b>교통 인프라</b>로 98점(공동 1위, 평균 65.22). 일본이 Top10에 든 항목은 교통 인프라·치안·신앙제한·지속가능성·마케팅(11위).", src:"2026-SEA225B p41, p43"},
     {n:"(32)", a:11, why:"주요 10개 언어의 통용도＝<b>커뮤니케이션 숙련도</b>로 8점·123위. ⑰마케팅은 58점·11위로 고평가이므로 혼동하지 말 것.", src:"2026-SEA225B p41, p43"},
     {n:"(33)", a:12, why:"현지 여행 관계자의 이슬람 지식 습득도＝<b>관계자의 인식</b>으로 8점·98위. 커뮤니케이션과 함께 '현장 대응력 부족'을 보여주는 2항목.", src:"2026-SEA225B p41, p43"},
-    {n:"(34)", a:14, why:"<b>예배소</b>가 10점으로 공동 133위 최하위(21개국). 서비스 항목(배점 40%) 중 예배소와 할랄 식사는 각 10%로 비중이 커서 일본의 종합순위를 끌어내리고 있다.", src:"2026-SEA225B p41, p43"},
-    {n:"(35)", a:17, why:"도쿄 387·사이타마 59·가나가와 52·지바 42로 <b>남관동권</b>이 압도적(타베로그, 2026년 6월 1일 현재). 다음이 간사이권·도카이권. 전국 합계는 타베로그 912개, 할랄구르메재팬 823개.", src:"2026-SEA225B p23~24"}
+    {n:"(34)", a:14, why:"<b>예배소</b>가 10점으로 공동 133위 최하위(21개국). 서비스 항목(배점 40%) 중 예배소·할랄 식사·공항은 각 10%로 비중이 커서 일본의 종합순위를 끌어내리고 있다.", src:"2026-SEA225B p41, p43"},
+    {n:"(35)", a:17, why:"도쿄 387·사이타마 59·가나가와 52·지바 42로 <b>남관동권</b>이 압도적(타베로그, 2026년 6월 1일 현재). 다음이 도카이권(아이치 71)·간사이권. 전국 합계는 타베로그 912개, 할랄구르메재팬 823개.", src:"2026-SEA225B p23~24"}
   ]
 },
 {
@@ -358,15 +777,221 @@ const DATA = [
   ]
 }];
 
-const ans = {};
-let graded = false;
+/* ══════════ 보충문제 ══════════ */
+const DATA_PLUS = [
+{
+  num:"보I", title:"무함마드와 이슬람력", jp:"ムハンマドとイスラーム暦", pts:"1점×8문＝8점", per:1, type:"cloze",
+  instr:"다음 글의 (1)~(8)에 들어갈 말·수치를 ①~⑯ 중에서 각각 하나씩 고르시오. 선택지는 (1)~(8) 공통이다.",
+  legend:["622년","628년","630년","632년","메디나 (メディーナ)","메카 (メッカ)","정통 칼리프 시대 (正統カリフ時代)","우마이야조 (ウマイヤ朝)","순수태음력 (純粋太陰暦)","태음태양력 (太陰太陽暦)","354일","365일","윤달 (閏月)","윤년 (閏年)","33년간","32년간"],
+  passage:[
+    "무함마드의 포교 내용은 부족적·전통적 가치관과 대립해 박해를 불렀다. 그래서 서력 【1】, 무함마드는 아부 바크르 등 70명의 신도와 함께 메카에서 북방 350km에 있는 야스리브, 즉 현재의 【2】로 이주했다. 이 이주를 히즈라라 하며, 그 해가 히즈라력의 원년(AH 1년)이 된다. 그 뒤 【3】에는 양자가 화평조약을 맺었으나, 630년 무함마드 측은 조약 위반을 구실로 메카를 정복했다. 632년 메카 순례 중에 무함마드가 사망했을 때 성인이 된 아들이 없었기 때문에, 친족이 통치하는 【4】가 시작되었고 이는 후계자 분쟁의 원인이 되었다.",
+    "히즈라력은 【5】이며, 신월에서 다음 신월까지의 삭망월(29일과 몇 시간)을 기준으로 한다. 1년은 신월 12회, 즉 12개월로 【6】이 된다. 29일인 달과 30일인 달이 교대로 오지만 【7】을 두지 않기 때문에 계절과 어긋나며, 결과적으로 서력 32년간이 히즈라력 【8】에 해당한다."
+  ],
+  qs:[
+    {n:"(1)", a:0, why:"히즈라는 <b>622년</b>. ②628년은 화평조약, ③630년은 메카 정복, ④632년은 무함마드의 사망으로, 네 연도를 순서대로 붙여 외울 것.", src:"제16회 슬라이드 (개조 무함마드)"},
+    {n:"(2)", a:4, why:"야스리브의 현재 이름이 <b>메디나</b>. 「메카에서 북방 350km」「70명」이라는 숫자도 함께 표시되어 있었다.", src:"제16회 슬라이드"},
+    {n:"(3)", a:1, why:"<b>628년</b> 화평조약 → 630년 조약 위반을 구실로 메카 정복이라는 2단 구성. 630년만 외우고 628년을 빠뜨리기 쉽다.", src:"제16회 슬라이드"},
+    {n:"(4)", a:6, why:"성인이 된 아들이 없어 친족이 통치한 시기가 <b>정통 칼리프 시대</b>. ⑧우마이야조는 그 뒤의 왕조이므로 순서 주의.", src:"제16회 슬라이드"},
+    {n:"(5)", a:8, why:"히즈라력은 <b>순수태음력</b>. ⑩태음태양력은 윤달로 계절과의 어긋남을 조정하는 역법으로, 히즈라력과 정반대의 성격.", src:"제17회 슬라이드 (이슬람의 역법)"},
+    {n:"(6)", a:10, why:"1년＝12개월＝<b>354일</b>. 태양력의 365일과 약 11일 차이가 나므로 3년에 약 1개월분 어긋난다.", src:"제17회 슬라이드"},
+    {n:"(7)", a:12, why:"<b>윤달을 두지 않는다</b>는 것이 순수태음력의 결정적 특징. 「윤년(⑭)」과 바꿔치기하는 선택지에 주의.", src:"제17회 슬라이드"},
+    {n:"(8)", a:14, why:"서력 32년간 ≒ 히즈라력 <b>33년간</b>. 숫자가 비슷해 32와 33을 뒤바꾸기 쉬우므로 「히즈라력 쪽이 1년 많다」로 기억.", src:"제17회 슬라이드"}
+  ]
+},
+{
+  num:"보II", title:"이슬람법의 5법규칙", jp:"イスラーム法の法規則", pts:"1점×10문＝10점", per:1, type:"cloze",
+  instr:"다음 글의 (9)~(18)에 들어갈 말을 ①~⑩ 중에서 각각 하나씩 고르시오. 선택지는 (9)~(18) 공통이다.",
+  legend:["와지브 (ワージブ／의무)","만두브 (マンドゥーフ／추천)","무바흐 (ムバーフ／허용)","마크루흐 (マクルーフ／기피)","하람 (ハラム／금지)","할랄 (ハラール)","슈브하 (シュブハ)","토이입 (トイイブ)","나주스 (ナジス)","할랄란 토이이반 (ハラーラン・トイイバン)"],
+  passage:[
+    "이슬람법은 인간의 행위를 다섯 가지 법규칙으로 분류한다. 반드시 해야 하는 의무는 【9】, 하는 편이 좋다고 권장되는 것은 【10】(무스타하브), 해도 하지 않아도 좋은 것은 【11】, 하지 않는 편이 좋다고 기피되는 것은 【12】, 그리고 행하면 벌받는 것이 【13】이다.",
+    "이 가운데 벌받는 것을 제외한 네 가지, 즉 '적어도 「행했다」는 이유로 벌받는 일이 없는 행위·사물'을 총칭해 【14】이라 한다. 【14】과 【13】은 서로 대의어이며, 【13】은 논할랄이라고도 불린다. 한편 어디에 분류해야 할지 판단재료가 없어 판단이 서지 않는 상태의 행위·사물은 【15】라 한다.",
+    "또 쿠란은 「사람들이여, 지상의 것 가운데 허용된 좋은 것을 먹으라」[2:168]고 한다. 여기서 '허용된'이 할랄, '좋은 것'이 【16】이며, 둘을 합친 '허용된 좋은 것'을 【17】이라 한다. 즉 무슬림이 먹어야 할 것은 할랄이면서 【16】인 것이다. 참고로 【16】의 대의어는, 불결하다고 간주되는 것을 뜻하는 【18】이다."
+  ],
+  qs:[
+    {n:"(9)",  a:0, why:"의무＝<b>와지브(ワージブ, Wajib)</b>. 오행(예배·단식 등)이 여기에 해당한다.", src:"제17회 슬라이드 (이슬람법)"},
+    {n:"(10)", a:1, why:"추천＝<b>만두브(マンドゥーフ)</b>, 별칭 무스타하브. 우므라(간략한 순례)가 대표 예.", src:"제17회 슬라이드"},
+    {n:"(11)", a:2, why:"허용＝<b>무바흐(ムバーフ)</b>. 해도 안 해도 상관없는 중립 영역.", src:"제17회 슬라이드"},
+    {n:"(12)", a:3, why:"기피＝<b>마크루흐(マクルーフ)</b>. 「금지는 아니지만 하지 않는 편이 좋다」이므로 하람과 구별할 것.", src:"제17회 슬라이드"},
+    {n:"(13)", a:4, why:"금지＝<b>하람(ハラム, Haram)</b>＝행하면 벌받는 행위. 논할랄이라고도 한다.", src:"제17회 슬라이드"},
+    {n:"(14)", a:5, why:"의무·추천·허용·기피의 네 가지를 아우르는 총칭이 <b>할랄</b>. 정의는 「적어도 「행했다」는 이유로 벌받는 일이 없는 행위·사물」로, 「좋은 것」이라는 뜻이 아니라는 점이 함정.", src:"제17회 슬라이드"},
+    {n:"(15)", a:6, why:"판단재료가 없어 분류할 수 없는 상태가 <b>슈브하(シュブハ, Shubha)＝의심스러운 것</b>. 표에서는 할랄·하람과 나란히 놓인다.", src:"제17회 슬라이드"},
+    {n:"(16)", a:7, why:"'좋은 것'＝<b>토이입(トイイブ, toyyib)</b>. 「건강에 이로운·양질의」라는 뜻.", src:"제19회 슬라이드 (식의 금기)"},
+    {n:"(17)", a:9, why:"할랄＋토이입＝<b>할랄란 토이이반(halalan toyyiban)</b>. 「무슬림이 먹어야 할 것은 할랄이면서 토이입인 것」이 결론 문장.", src:"제19회 슬라이드"},
+    {n:"(18)", a:8, why:"토이입의 대의어가 <b>나주스(ナジス, najis)</b>. 할랄↔하람 / 토이입↔나주스라는 <b>두 쌍</b>을 뒤섞는 것이 전형적인 함정.", src:"제19회 슬라이드"}
+  ]
+},
+{
+  num:"보III", title:"인증기준의 상위", jp:"認証基準の相違", pts:"1점×6문＝6점", per:1, type:"match",
+  instr:"(19)~(24)의 각 문장은 어느 나라의 대응을 설명한 것인지 ①~④ 중에서 각각 하나씩 고르시오. 선택지는 (19)~(24) 공통이며, 같은 선택지를 여러 번 골라도 된다.",
+  legend:["말레이시아","인도네시아","싱가포르","사우디아라비아"],
+  qs:[
+    {n:"(19)", t:"레스토랑의 좌석을 남성석·여성석·가족석으로 나누고 남성석에서 여성석이 보이지 않도록 칸막이를 두었으나, 2019년 12월로 이 규제를 폐지했다.",
+     a:3, why:"<b>사우디아라비아</b>. 이유는 여성 측의 「얼굴을 보이고 싶지 않다·숨겨야 한다」「식사하는 모습을 가족 외 남성에게 보이는 것은 부끄럽다」는 인식. <b>2019년 12월 폐지</b>라는 시점이 출제 포인트.", src:"제21회 슬라이드 (이슬람의 차이 ①남녀 분리)"},
+    {n:"(20)", t:"레스토랑에서 남·여·가족을 나누는 것은 필수가 아니지만, 중동 관광객용으로 칸막이를 준비한 고급 아랍요리 레스토랑이 존재한다.",
+     a:0, why:"<b>말레이시아</b>. 같은 이슬람 국가라도 법학파·사회 관행에 따라 대응이 갈린다는 것을 보여주는 대비 사례.", src:"제21회 슬라이드"},
+    {n:"(21)", t:"「펫을 시설 내에 데려와서는 안 된다」고 규정해, 신체장애자 보조견도 사실상 배제된다.",
+     a:0, why:"<b>말레이시아</b>. 개는 나주스이므로 엄격하게 대응. 보조견에 관한 국제기관에 가맹한 이슬람 국가는 하나도 없다는 서술도 함께 나온다.", src:"제21회 슬라이드 (이슬람의 차이 ②보조견)"},
+    {n:"(22)", t:"「보조견이라면 점내에 데려와도 좋고, 전용 식기라면 보조견이 점내에서 먹고 마셔도 된다」고 규정한다.",
+     a:2, why:"<b>싱가포르</b>. 말레이시아(금지)와 정면으로 대비되는 사례로, 두 나라를 뒤바꾸는 문제가 나오기 쉽다.", src:"제21회 슬라이드"},
+    {n:"(23)", t:"코피 루왁에 대해 ①원두 상태가 잘 보존되어 심으면 싹틀 것 ②분변에서 채취한 뒤 즉시 세정될 것이라는 두 조건을 충족하면 할랄로 인정한다.",
+     a:0, why:"<b>말레이시아</b>. 동물의 분뇨는 원래 나주스이므로 「다른 동물의 분뇨와의 정합성을 어떻게 유지할 것인가」가 쟁점이 되었고, 그 결과가 이 2조건.", src:"제21회 슬라이드 (로컬 문화의 차이 ②코피 루왁)"},
+    {n:"(24)", t:"말레이시아와 함께 코피 루왁을 각국으로 수출하는 나라로 거론되며, 사향고양이의 자바어 명칭 luwak이 그 상품명의 어원이 되었다.",
+     a:1, why:"<b>인도네시아</b>. 자바어에서 온 이름이라는 점이 힌트. 일본에서는 원두 100g당 5,000엔 이상에 팔린다는 수치도 표시되어 있었다.", src:"제21회 슬라이드"}
+  ]
+},
+{
+  num:"보IV", title:"MS1500과 MS2610", jp:"MS1500とMS2610", pts:"1점×8문＝8점", per:1, type:"triple",
+  instr:"(25)~(32)의 ㄱ·ㄴ·ㄷ 중 옳은 것만을 고른 조합을 ①~⑤ 중에서 각각 하나씩 고르시오. 선택지는 (25)~(32) 공통이다.",
+  legend:TRI,
+  qs:[
+    {n:"(25)", t:"MS1500의 심사·인증 대상 외", s:[
+      "가공이 되어 있지 않은 천연산품, 즉 생선·야채·과일 등은 인증 취득이 불요하다.",
+      "비료, 사료, 펫푸드는 사람의 음식이 아니므로 대상 외이다.",
+      "보건성이 의약품으로 인정한 제품도 MS1500에 근거해 인증된다."],
+      a:0, why:"ㄷ이 틀렸다. 의약품은 <b>MS1500 이외의 인증 대상</b>(＝MS2424:2019). 또 천연산품이라도 회(刺身) 등 가공을 거친 것은 인증 대상이 된다는 단서가 붙는다.", src:"제20회 슬라이드 (수순2 심사)"},
+    {n:"(26)", t:"MS1500의 심사 절차", s:[
+      "심사는 서류심사, 현지조사, 상품 샘플 조사로 이루어진다.",
+      "현지조사에서는 식품위생 심사관과 이슬람 심사관 2명이 시설을 방문해 회사 간부·종업원에게 청취조사를 한다.",
+      "필요에 따라 샘플을 가지고 돌아가 화학검사를 실시한다."],
+      a:3, why:"셋 다 옳다. 방문 대상 시설은 <b>식품공장·레스토랑·도축장</b> 등. 「심사관 2명」과 그 <b>내역(식품위생＋이슬람)</b>까지 세트로 외울 것.", src:"제20회 슬라이드 (수순2 심사)"},
+    {n:"(27)", t:"인증의 유효기간과 재심사", s:[
+      "인증의 유효기간은 3년간이며, 기간이 지나면 다시 심사를 받는다.",
+      "유효기간 내라도 신청 시점과 상황이 바뀐 경우에는 다시 심사를 받는다.",
+      "재심사가 필요한 예로 원재료 매입처의 변경, 제조라인의 변경, 이전 등을 들 수 있다."],
+      a:2, why:"ㄱ이 틀렸다. 유효기간은 <b>2년간</b>. 「3년」「4년」으로 바꾼 선택지가 나오면 즉시 오답 처리할 것.", src:"제20회 슬라이드 (수순3 인증)"},
+    {n:"(28)", t:"인증 후의 표시와 위조", s:[
+      "할랄 로고는 점포에 게시할 수만 있고 상품에 첨부하는 것은 인정되지 않는다.",
+      "인증을 취득하지 않았는데 증명서를 게시하거나 로고를 첨부하면 거래표시법 위반으로 형사벌의 대상이 된다.",
+      "「할랄 비어」처럼 명칭이 적절하지 않은 것은 심사 대상에서 제외된다."],
+      a:2, why:"ㄱ이 틀렸다. <b>상품에 할랄 로고를 첨부할 수 있다</b>. 그 밖의 대상 제외 사유로 헤어컬러·헤어다이 등 이슬람에서 금지된 행위와 관련된 것이 있다.", src:"제20회 슬라이드 (수순3 인증·위조)"},
+    {n:"(29)", t:"말레이시아 규격(MS)의 번호와 대상", s:[
+      "MS2610:2015는 관광(호텔·투어·가이드)을 대상으로 한다.",
+      "MS2565:2014(Halal Packaging)는 패키지를 대상으로 한다.",
+      "MS2627:2017(Detection of Porcine DNA)은 돼지 유전자의 검출방법을 정한다."],
+      a:3, why:"셋 다 옳다. 이 밖에 MS1500:2019＝식품, MS2424:2019＝의약품, MS2393:2013＝용어의 정의, MS2300:2009＝경영, MS2594:2015＝음료수. <b>번호와 대상의 조합</b>이 그대로 출제된다.", src:"제23회 슬라이드 (MS 기준 일람)"},
+    {n:"(30)", t:"MS2610:2015 「5.2.3 공중 무살라」", s:[
+      "시설에는 무슬림용 공중 무살라가 설치되어 있어야 한다.",
+      "무살라는 키블라 표시만 있으면 되고 간판은 필요하지 않다.",
+      "적절한 환기와 충분한 조명이 있고, 청결하게 유지되며 적절한 유지보수가 실시되어야 한다."],
+      a:1, why:"ㄴ이 틀렸다. 요건 a)는 <b>「적절한 장소에 할당됨과 동시에 간판이 있을 것」</b>. 요건 c)는 <b>권위 있는 당국의 확증을 얻은 키블라</b>가 명확히 표시될 것으로, 셋(a 간판 / b 환기·조명·청결 / c 키블라)을 세트로 외울 것.", src:"제23회 슬라이드 (5. 특정 요건 5.2 숙박시설)"},
+    {n:"(31)", t:"JAKIM", s:[
+      "연방정부 총리부 이슬람개발국이며, 말레이시아에서 이슬람 행정을 담당하는 부서이다.",
+      "1974년부터 인증기관으로서의 업무를 시작했다.",
+      "금융 분야를 포함한 모든 분야의 할랄 인증을 담당한다."],
+      a:0, why:"ㄷ이 틀렸다. JAKIM은 <b>금융 이외</b>의 분야·기준에 근거한 인증을 하는 단체다. 금융은 별도 체계(샤리아 보드)라는 점과 연결해 이해할 것.", src:"제23회 슬라이드 (인증단체)"},
+    {n:"(32)", t:"MS2610:2015와 라마단 대응", s:[
+      "사후르는 일몰 후의 식사를, 이프타르는 새벽 전의 식사를 가리킨다.",
+      "MS2610:2015는 식품공장을 주된 대상으로 하는 기준이다.",
+      "MS1500:2019는 관광분야의 인증기준이다."],
+      a:4, why:"셋 다 틀렸다. <b>사후르＝일출 전, 이프타르＝일몰 후</b>로 정반대. MS2610은 <b>관광</b>(숙박시설·투어 패키지·투어 가이드), MS1500은 <b>식품</b>. 세 가지 모두 전형적인 뒤바꾸기 함정이다.", src:"제23회 슬라이드 (5.2.2.2 / 인증기준)"}
+  ]
+},
+{
+  num:"보V", title:"성지순례와 이슬람 관광시장", jp:"聖地巡礼と観光市場", pts:"1점×10문＝10점", per:1, type:"cloze",
+  instr:"다음 글의 (33)~(42)에 들어갈 말·수치를 ①~⑱ 중에서 각각 하나씩 고르시오. 선택지는 (33)~(42) 공통이다.",
+  legend:["핫지 (ハッジ)","우므라 (ウムラ)","지야라 (ズィヤーラ)","자카트 (ザカート)","거주나 취로","여가활동이나 스포츠 관전","타분 핫지 (Lembaga Tabung Haji)","JAKIM","자산운용 (資産運用)","기부 (寄付)","2,169","1,980","11","20","사우디아라비아","UAE","터키","인도네시아"],
+  passage:[
+    "이슬람에서 여행은 쿠란이 「지상을 여행하라」[29:20]고 권하는 행위이지만, 순례와 여행은 구별된다. 행선지와 목적이 이슬람에서 의의를 부여받은 종교 투어리즘이 순례이며, 그 예로 정해진 시기에 행하는 대순례인 【33】, 그 이외의 시기에 행하는 간략한 순례인 【34】, 그리고 아라비아어로 「방문」을 뜻하며 성자묘 참배를 가리키는 【35】의 세 가지가 있다. 한편 이민이나 돈벌이처럼 【36】을 목적으로 하는 이동은 관광에 포함되지 않는다.",
+    "메카 순례를 보내는 쪽의 체제로, 말레이시아에는 핫지 관련 업무를 총괄하는 정부계 공사 【37】가 있다. 개인이 계좌를 개설해 정기적립을 하고, 핫지를 신청하면 계좌에서 비용이 충당되는 구조이며, 왕복 도항비(전세기)·비자 대행·호텔비·가이드비 등을 패키지로 제공하고 현지에는 오피스와 병원·구급차까지 갖추고 있다. 나아가 모인 자금을 이슬람식으로 【38】하여 호텔 경영 등도 한다. 2025년의 순례 할당 건수는 인도네시아가 22만 1,000건으로 가장 많고, 말레이시아 3만 1,600건, 태국 1만 3,000건, 싱가포르 900건이 뒤를 잇는다.",
+    "이슬람 관광시장의 규모는 2023년에 사상 처음으로 2,000억 미국 달러를 넘어 【39】억 달러가 되었다. 2019년 시점에서는 세계 관광시장의 약 【40】%를 차지해 미국시장과 같은 정도의 규모였다. 그 2019년의 내역을 보면, 관광객 지출액 1위는 243억 달러의 【41】이며, 인바운드(방문객 수) 1위는 640만 명의 【42】이다."
+  ],
+  qs:[
+    {n:"(33)", a:0, why:"대순례＝<b>핫지</b>. 오행의 하나로 의무에 해당한다.", src:"제22회 슬라이드 (성지순례 (1)개요)"},
+    {n:"(34)", a:1, why:"핫지 이외의 시기에 행하는 간략한 순례가 <b>우므라</b>. 의무가 아니라 <b>추천</b>이라는 점이 핫지와의 차이.", src:"제22회 슬라이드"},
+    {n:"(35)", a:2, why:"「방문」→「성자묘 참배」가 <b>지야라</b>. 대상은 무함마드의 친족, 역대 칼리프, 이맘, 저명 법학자, 성자(왈리), 신비주의자(수피)이며 각지에 점재한다. ④자카트는 희사(오행)로 순례와 무관.", src:"제22회 슬라이드"},
+    {n:"(36)", a:4, why:"<b>거주나 취로</b>를 목적으로 하는 이동(이민·돈벌이)은 관광이 아니다. ⑥여가활동·스포츠 관전은 반대로 「여행」의 예로 들려 있으므로 정반대.", src:"제22회 슬라이드"},
+    {n:"(37)", a:6, why:"<b>타분 핫지(Lembaga Tabung Haji)</b>. 「정부계 공사」라는 성격과, 계좌 개설→정기적립→신청→비용 충당의 흐름이 세트.", src:"제22회 슬라이드 (성지순례 (2)메카 순례)"},
+    {n:"(38)", a:8, why:"<b>자산운용(재정투융자)</b>. 이슬람식 운용과 호텔 경영까지 한다는 점이 특징적이라 출제되기 쉽다.", src:"제22회 슬라이드"},
+    {n:"(39)", a:10, why:"2023년 <b>2,169억 달러</b>로 「사상 첫 2,000억 달러 초과」. ⑫1,980은 2019년 값으로, 코로나 전 최고치와 혼동시키는 함정.", src:"제22회 슬라이드 (이슬람 관광시장)"},
+    {n:"(40)", a:12, why:"세계 관광시장의 <b>11% 정도</b>이며 미국시장과 같은 규모. 「20%」로 부풀린 선택지에 주의.", src:"제22회 슬라이드"},
+    {n:"(41)", a:14, why:"관광객 지출 1위는 <b>사우디아라비아</b> 243억 달러. 이하 UAE 172억, 카타르 142억, 쿠웨이트 130억, 인도네시아 112억.", src:"제22회 슬라이드"},
+    {n:"(42)", a:16, why:"인바운드 1위는 <b>터키</b> 640만 명. 이하 UAE 620만, 러시아 560만, 말레이시아 530만, 프랑스 500만. <b>지출 1위＝사우디 / 인바운드 1위＝터키</b>의 대비가 핵심.", src:"제22회 슬라이드"}
+  ]
+},
+{
+  num:"보VI", title:"방일 무슬림 관광객", jp:"訪日ムスリム観光客", pts:"1점×10문＝10점", per:1, type:"cloze",
+  instr:"다음 글의 (43)~(52)에 들어갈 말·수치를 ①~⑱ 중에서 각각 하나씩 고르시오. 선택지는 (43)~(52) 공통이다.",
+  legend:["비지트 재팬 사업 (ビジット・ジャパン事業)","쿨 재팬 전략","관광청 (観光庁)","국토교통성 (国土交通省)","정식 통계 (正式な統計)","국적 (国籍)","종교 (宗教)","무슬림 인구비 (ムスリム人口比)","3~5","5~8","200","150","정교분리 (政教分離)","신교의 자유 (信教の自由)","6단체","12단체","도카이권 (東海圏)","규슈권 (九州圏)"],
+  passage:[
+    "방일 외국인 여행자의 증가를 목적으로 한 방일 프로모션 사업이 【43】이며, 2003년 국토교통성을 중심으로 시작되어 2008년에는 【44】이 설치되었다. 2026년 현재 23개국·지역이 중점시장으로 지정되어 있고, 동남·남아시아·중동에서는 태국·싱가포르·말레이시아·인도네시아·필리핀·베트남·인도와 중동지역(GCC 6개국, 터키, 이스라엘)이 포함된다.",
+    "다만 방일 무슬림 관광객에 대해서는 【45】가 존재하지 않는다. 외국인용 출입국 카드에 【46】를 기재하는 난이 없기 때문이며, 그래서 국가별 관광객 수에 국가별 【47】를 곱해 합산하는 방법으로 추계한다. 이 추계에 따르면 무슬림 관광객이 전체 관광객에서 차지하는 비율은 2003~20년에 대체로 【48】%의 범위로 추이했으나, 2021~22년에는 중국으로부터의 관광객이 대폭 줄어든 결과 상대적으로 비율이 높아져 2021년에는 9.68%에 달했다. 실수(實數)로는 2023~25년에 연간 100만 명에서 【49】만 명 초과로 늘어났다.",
+    "한편 일본 국내의 수용 환경을 보면, 헌법 제20조의 【50】 때문에 정부·자치체는 할랄 인증을 실시하지 않으며, 그 결과 민간 인증단체가 난립해 그 수는 약 80~90개로 추정된다. 그 가운데 JAKIM이 인정한 일본의 할랄 인증단체는 2025년 현재 【51】다. 또 할랄 레스토랑의 분포는 남관동권·간사이권·【52】의 세 지역에 치우쳐 있다."
+  ],
+  qs:[
+    {n:"(43)", a:0, why:"<b>비지트 재팬 사업</b>. 목적은 「방일 외국인 여행자의 증가를 목적으로 한 방일 프로모션 사업」이라는 문구 그대로 나온다.", src:"제24회 슬라이드 (비지트 재팬 사업)"},
+    {n:"(44)", a:2, why:"2003년 국토교통성 중심으로 스타트 → <b>2008년 관광청 설치</b>. 두 연도와 두 조직의 대응을 뒤바꾸는 문제 주의.", src:"제24회 슬라이드"},
+    {n:"(45)", a:4, why:"방일 무슬림 관광객에 대한 <b>정식 통계는 없다</b>. 「통계가 있다」로 바꾼 선택지가 나오면 오답.", src:"제24회 슬라이드 (방일 외국인 무슬림 관광객의 동향)"},
+    {n:"(46)", a:6, why:"출입국 카드에 <b>종교</b> 기재란이 없다. ⑥국적은 기재되므로 국가별 관광객 수는 알 수 있고, 그래서 다음의 추계식이 성립한다.", src:"제24회 슬라이드"},
+    {n:"(47)", a:7, why:"추계식은 <b>Σ(국가별 관광객 수 × 국가별 무슬림 인구비)</b>. 형광펜으로 표시된 계산식이므로 그대로 나올 가능성이 높다.", src:"제24회 슬라이드"},
+    {n:"(48)", a:8, why:"2003~20년은 대체로 <b>3~5%</b> 범위. 2021년의 9.68%는 중국 관광객 격감에 따른 <b>상대적</b> 상승이라는 설명과 세트.", src:"제24회 슬라이드"},
+    {n:"(49)", a:10, why:"2023~25년에 연간 100만 명 → <b>200만 명 초과</b>(2025년 206.1만 명). 같은 해 전 관광객은 4,268.4만 명, 비율 4.83%.", src:"제24회 슬라이드"},
+    {n:"(50)", a:12, why:"헌법 제20조의 <b>정교분리</b> 때문에 정부·자치체가 인증을 실시하지 않는다 → 민간 단체 난립. 「신교의 자유」와 조문 취지를 바꿔치기하는 함정이 있다.", src:"제25회 슬라이드 (할랄 단체의 난립)"},
+    {n:"(51)", a:14, why:"JAKIM 인정 단체는 <b>6단체</b>(2025년 현재). 일본무슬림협회·일본할랄협회(2017년 이전), 일본이슬람문화센터·무슬림프로페셔널재팬협회·일본아시아할랄협회(2017년), 재팬할랄파운데이션(2019년). 일본할랄유닛협회는 뒤에 실효되어 6에 포함되지 않는다.", src:"제25회 슬라이드"},
+    {n:"(52)", a:16, why:"남관동권·간사이권과 함께 <b>도카이권</b>(아이치 71 등)에 집중. ⑱규슈권은 후쿠오카 16 정도로 자릿수가 다르다.", src:"제25회 슬라이드 (도도부현별 게재 점포 수)"}
+  ]
+},
+{
+  num:"보VII", title:"일본 기업의 대응과 GMTI 2025", jp:"日本企業とGMTI 2025", pts:"1점×8문＝8점", per:1, type:"triple",
+  instr:"(53)~(60)의 ㄱ·ㄴ·ㄷ 중 옳은 것만을 고른 조합을 ①~⑤ 중에서 각각 하나씩 고르시오. 선택지는 (53)~(60) 공통이다.",
+  legend:TRI,
+  qs:[
+    {n:"(53)", t:"일본 식품 메이커의 구조적 문제", s:[
+      "다른 산업보다 국내시장에 강하게 의존하는 내수계이다.",
+      "단기의 경기동향에 좌우되기 어렵다.",
+      "장기의 시장구조 변화에는 대응하기 쉽다."],
+      a:0, why:"ㄷ이 틀렸다. 장기의 시장구조 변화에는 <b>대응하기 어렵다</b>. 그래서 해외진출·판매가 장기 과제가 된다는 흐름.", src:"제25회 슬라이드 (일본의 식품시장)"},
+    {n:"(54)", t:"해외매출고비율 (overseas sales ratio)", s:[
+      "(국내 본사의 해외수출 매출 ＋ 해외자회사의 현지 매출) ÷ 전 매출고로 계산한다.",
+      "도쿄증권 상장기업 식품업(151사)의 해외매출고비율은 33업종 중 27위(2009년)로 낮은 편이다.",
+      "비율이 높은 기업으로 킷코만(58.6%), 아지노모토(54.6%), 미쓰칸(53.0%)을 들 수 있다."],
+      a:3, why:"셋 다 옳다. 계산식과 「27/33위」라는 순위, 상위 3사의 수치가 모두 형광펜 표시 대상이었다.", src:"제25회 슬라이드"},
+    {n:"(55)", t:"대기업의 전형적인 전개", s:[
+      "현지에 공장을 설립하고 현지에서 원재료를 조달한다.",
+      "현지 인증기관에서 할랄 인증을 취득한다.",
+      "현지에서 판매할 뿐이며 일본으로 역수입하지는 않는다."],
+      a:0, why:"ㄷ이 틀렸다. 대기업은 현지 판매 → 다른 이슬람 국가로 수출 → <b>일본에도 역수입</b>까지 한다. 예로 아지노모토, 오츠카제약, 일본식연, 양품계획(무인양품).", src:"제25회 슬라이드 (제조와 인증취득)"},
+    {n:"(56)", t:"중소기업의 전형적인 전개", s:[
+      "국내에서 제조하지만 원재료는 전량 현지에서 조달한다.",
+      "국내 인증기관에서 할랄 인증을 취득한다.",
+      "지역 산품 수출에 적극적인 지방자치체와 조합되는 경우가 있다."],
+      a:2, why:"ㄱ이 틀렸다. 중소기업은 <b>국내에서 제조하고 국내에서 원재료를 조달</b>한다. 「국내 중소기업 ＋ 지방자치체 ＋ 국내 인증단체」의 조합이 정형.", src:"제25회 슬라이드"},
+    {n:"(57)", t:"일본의 할랄 인증단체", s:[
+      "헌법 제20조의 정교분리 때문에 정부·자치체는 할랄 인증을 실시하지 않는다.",
+      "재일 무슬림의 전국연합조직이 존재해 인증기준을 통일하고 있다.",
+      "단체의 형태는 비영리 NPO·NGO, 종교법인, 컨설팅 회사 등이다."],
+      a:1, why:"ㄴ이 틀렸다. <b>전국연합조직은 존재하지 않으며</b>, 무슬림·비무슬림 모두가 인정하는 이슬람의 권위도 국내에 없다. 그 결과가 「민간 단체의 난립(약 80~90개)」.", src:"제25회 슬라이드"},
+    {n:"(58)", t:"체인점의 할랄 대응", s:[
+      "맥도날드는 일본에서도 할랄 인증을 취득했다.",
+      "마루가메제면은 싱가포르에서 할랄 인증을 취득했다.",
+      "코코이찌방야는 일본에서 전혀 대응하고 있지 않다."],
+      a:4, why:"셋 다 틀렸다. 맥도날드·KFC·피자헛은 MY○ SG○ ID○ <b>JP×</b>. 마루가메제면은 MY○ <b>SG×</b> ID○ JP×. 코코이찌방야는 <b>JP△(일부 점포·메뉴 대응)</b>. 표의 ○△×는 「일본은 대체로 ×, 코코이찌방야만 △」로 기억.", src:"제25회 슬라이드 (주요 체인점의 인증 취득 상황)"},
+    {n:"(59)", t:"GMTI 2025 OIC 가맹국판", s:[
+      "1위는 말레이시아(79점)이다.",
+      "2위 그룹은 터키·사우디아라비아·UAE(78점)이다.",
+      "인도네시아는 3위(78점)로 UAE를 웃돈다."],
+      a:0, why:"ㄷ이 틀렸다. 인도네시아는 카타르와 함께 <b>5위(76점)</b>. 「OIC 가맹국 1위＝말레이시아 79 / OIC 비가맹국 1위＝싱가포르 71」이라는 두 개의 1위를 세트로 외울 것.", src:"제25회 슬라이드 (GMTI 2025 랭킹)"},
+    {n:"(60)", t:"GMTI 2025의 배점과 일본의 평가", s:[
+      "서비스(SERVICES) 항목이 전체의 40%를 차지하며, 그중 예배소·할랄 식사·공항이 각 10%이다.",
+      "일본은 OIC 비가맹국 중 14위(51점)로, 15위 한국(50점)을 근소하게 앞선다.",
+      "일본의 교통 인프라는 98점으로 공동 1위이다."],
+      a:3, why:"셋 다 옳다. 서비스 40%의 나머지는 숙박 5%·유산과 경험 5%. 일본의 약점은 커뮤니케이션 8점(123위)·관계자의 인식 8점(98위)·<b>예배소 10점(공동 133위·최하위)</b>이며, 마케팅은 58점·11위로 오히려 높다.", src:"제25회 슬라이드 (배점표·일본에의 평가)"}
+  ]
+}];
+
+/* ══════════ 엔진 ══════════ */
+const SETS = {
+  mock:{data:DATA_MOCK, full:50, ans:{}, graded:false},
+  plus:{data:DATA_PLUS, full:60, ans:{}, graded:false}
+};
+let active = 'mock';
 
 function el(tag, cls, html){ const e=document.createElement(tag); if(cls)e.className=cls; if(html!=null)e.innerHTML=html; return e; }
 
-function build(){
-  const root = document.getElementById('exam');
+function build(key){
+  const set = SETS[key];
+  const root = document.getElementById('exam-'+key);
   root.textContent = '';
-  DATA.forEach((sec, si)=>{
+  set.data.forEach((sec, si)=>{
     const s = el('section');
     const h = el('div','sec-head');
     h.append(el('span','sec-num', sec.num+'.'), el('h2','sec-title', sec.title),
@@ -407,8 +1032,8 @@ function build(){
         b.type='button'; b.setAttribute('aria-pressed','false');
         b.title = C[i]+' '+lab;
         b.addEventListener('click', ()=>{
-          if(graded) return;
-          ans[si+'-'+qi]=i;
+          if(set.graded) return;
+          set.ans[si+'-'+qi]=i;
           [...holder.children].forEach((c,ci)=> c.setAttribute('aria-pressed', ci===i?'true':'false'));
           pick.innerHTML = '선택 : <b>'+C[i]+' '+lab+'</b>';
           updateTally();
@@ -420,24 +1045,27 @@ function build(){
     });
     root.append(s);
   });
-  updateTally();
 }
 
-function total(){ let n=0; DATA.forEach(s=> n+=s.qs.length); return n; }
+function total(key){ let n=0; SETS[key].data.forEach(s=> n+=s.qs.length); return n; }
 
 function updateTally(){
-  const done = Object.keys(ans).length, all = total();
-  document.getElementById('tally').innerHTML = graded ? '채점 완료' : '미응답 <b>'+(all-done)+'</b> / '+all;
+  const t = document.getElementById('tally');
+  if(active==='note'){ t.textContent=''; return; }
+  const set = SETS[active];
+  const done = Object.keys(set.ans).length, all = total(active);
+  t.innerHTML = set.graded ? '채점 완료' : '미응답 <b>'+(all-done)+'</b> / '+all;
 }
 
-function grade(){
-  graded = true;
+function grade(key){
+  const set = SETS[key];
+  set.graded = true;
   let score=0; const rows=[];
-  DATA.forEach((sec,si)=>{
+  set.data.forEach((sec,si)=>{
     let sc=0, correct=0;
     sec.qs.forEach((q,qi)=>{
-      const box = document.querySelector('.q[data-s="'+si+'"][data-q="'+qi+'"]');
-      const chosen = ans[si+'-'+qi];
+      const box = document.querySelector('#exam-'+key+' .q[data-s="'+si+'"][data-q="'+qi+'"]');
+      const chosen = set.ans[si+'-'+qi];
       const ok = chosen===q.a;
       if(ok){ sc+=sec.per; correct++; }
       box.classList.add('graded', ok?'right':'wrong');
@@ -451,27 +1079,47 @@ function grade(){
       box.querySelectorAll('button').forEach(b=> b.disabled=true);
     });
     score+=sc;
-    rows.push('<tr><td>'+sec.num+'. '+sec.title+'</td><td>'+sec.jp+'</td><td class="n">'+sc+' / 10</td><td class="n">'+correct+' / '+sec.qs.length+'</td></tr>');
+    rows.push('<tr><td>'+sec.num+'. '+sec.title+'</td><td>'+sec.jp+'</td><td class="n">'+sc+' / '+(sec.per*sec.qs.length)+'</td><td class="n">'+correct+' / '+sec.qs.length+'</td></tr>');
   });
-  document.getElementById('totalTxt').textContent = score;
-  document.getElementById('breakdown').innerHTML = rows.join('');
-  const weak = DATA.filter((sec,si)=> sec.qs.filter((q,qi)=> ans[si+'-'+qi]===q.a).length / sec.qs.length < 0.7)
+  document.getElementById('totalTxt-'+key).textContent = score;
+  document.getElementById('breakdown-'+key).innerHTML = rows.join('');
+  const weak = set.data.filter((sec,si)=> sec.qs.filter((q,qi)=> set.ans[si+'-'+qi]===q.a).length / sec.qs.length < 0.7)
                    .map(s=>s.num+'. '+s.title);
-  document.getElementById('advice').innerHTML = weak.length
-    ? '약한 분야 : <strong>'+weak.join('　/　')+'</strong>　해설의 출처를 따라가 해당 레쥬메 페이지를 복습하세요.'
+  document.getElementById('advice-'+key).innerHTML = weak.length
+    ? '약한 분야 : <strong>'+weak.join('　/　')+'</strong>　해설의 출처를 따라가 「포인트 노트」 탭의 해당 회차를 복습하세요.'
     : '전 분야 7할 이상. 수치·순위까지 잡혀 있습니다.';
-  document.getElementById('result').classList.add('show');
+  document.getElementById('result-'+key).classList.add('show');
   updateTally();
-  document.getElementById('result').scrollIntoView({behavior:'smooth', block:'start'});
+  document.getElementById('result-'+key).scrollIntoView({behavior:'smooth', block:'start'});
 }
 
-document.getElementById('grade').addEventListener('click', grade);
-document.getElementById('reset').addEventListener('click', ()=>{
-  graded=false; Object.keys(ans).forEach(k=> delete ans[k]);
-  document.getElementById('result').classList.remove('show');
-  build(); window.scrollTo({top:0, behavior:'smooth'});
-});
-build();
+function reset(key){
+  const set = SETS[key];
+  set.graded=false; Object.keys(set.ans).forEach(k=> delete set.ans[k]);
+  document.getElementById('result-'+key).classList.remove('show');
+  build(key); updateTally(); window.scrollTo({top:0, behavior:'smooth'});
+}
+
+function show(key){
+  active = key;
+  ['mock','plus','note'].forEach(k=>{
+    document.getElementById('v-'+k).classList.toggle('on', k===key);
+  });
+  document.querySelectorAll('.tab').forEach(t=>
+    t.setAttribute('aria-selected', t.dataset.view===key ? 'true' : 'false'));
+  const quiz = (key!=='note');
+  document.getElementById('grade').classList.toggle('hide', !quiz);
+  document.getElementById('reset').classList.toggle('hide', !quiz);
+  updateTally();
+  window.scrollTo({top:0});
+}
+
+document.querySelectorAll('.tab').forEach(t=>
+  t.addEventListener('click', ()=> show(t.dataset.view)));
+document.getElementById('grade').addEventListener('click', ()=> grade(active));
+document.getElementById('reset').addEventListener('click', ()=> reset(active));
+
+build('mock'); build('plus'); show('mock');
 </script>
 
 <script>
